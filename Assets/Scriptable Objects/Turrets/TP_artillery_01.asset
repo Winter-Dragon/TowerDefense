@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14407fde523b7b04abae26f2bac4bfa3, type: 3}
+  m_Name: TP_artillery_01
+  m_EditorClassIdentifier: 
+  m_Type: 3
+  m_Tier: 1
+  m_GoldCost: 120
+  m_ProjectilePrefab: {fileID: 3243017834941496065, guid: 2bd29b253990c4645af3a795da48c7b1, type: 3}
+  m_Damage: {x: 8, y: 15}
+  m_RateOfFire: 3
+  m_Radius: 3
+  m_Homing: 1
+  m_LaunchSFX: {fileID: 0}

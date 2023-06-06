@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6429c6b75aa2ab4297d28649fe873e5, type: 3}
+  m_Name: Enemy_Granny
+  m_EditorClassIdentifier: 
+  m_WalkAnimations:
+  - {fileID: 21300000, guid: eb77ea78a49c701429d1c3ac5defc3ad, type: 3}
+  - {fileID: 21300000, guid: f1353bfdcd9f38247a9848515d227d10, type: 3}
+  - {fileID: 21300000, guid: 583a399181f527a4cb410ee3f41bbe12, type: 3}
+  - {fileID: 21300000, guid: 4b0860d6e429c074081202912e2d130f, type: 3}
+  m_AttackAnimations:
+  - {fileID: 21300000, guid: 1c041f53355b6e64d80101c69ca460b1, type: 3}
+  - {fileID: 21300000, guid: 0d597bf4b5c15a54bb2041b2c4c9acbb, type: 3}
+  - {fileID: 21300000, guid: 80db361458ce5b445a1f5d7111e1000f, type: 3}
+  - {fileID: 21300000, guid: ef7d9d91c441c9c4e9ec3c8e2f16adb0, type: 3}
+  m_HitPoints: 20
+  m_Armor: 0
+  m_MoveSpeed: 1
+  m_LivesCost: 1
+  m_GoldCost: 5
+  m_SpriteScale: {x: 0.5, y: 0.5}
+  m_ColliderSize: {x: 0.3, y: 0.5}

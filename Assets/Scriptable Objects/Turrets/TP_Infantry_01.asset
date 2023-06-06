@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14407fde523b7b04abae26f2bac4bfa3, type: 3}
+  m_Name: TP_Infantry_01
+  m_EditorClassIdentifier: 
+  m_Type: 2
+  m_Tier: 1
+  m_GoldCost: 80
+  m_ProjectilePrefab: {fileID: 0}
+  m_Damage: {x: 1, y: 3}
+  m_RateOfFire: 1
+  m_Radius: 2
+  m_Homing: 1
+  m_LaunchSFX: {fileID: 0}

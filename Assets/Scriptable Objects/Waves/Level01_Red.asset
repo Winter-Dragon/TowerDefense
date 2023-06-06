@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a4c69e83a3504d9d02b7be47d3e1d, type: 3}
+  m_Name: Level01_Red
+  m_EditorClassIdentifier: 
+  m_level: 1
+  m_NumberWaves: 5
+  m_Waves:
+  - m_Wave: 1
+    m_Enemy: {fileID: 11400000, guid: a6fe10b5d4d276340b1edb3b349e643c, type: 2}
+    m_Amount: 5
+    m_SpawnSpeed: 2
+  - m_Wave: 2
+    m_Enemy: {fileID: 11400000, guid: a6fe10b5d4d276340b1edb3b349e643c, type: 2}
+    m_Amount: 10
+    m_SpawnSpeed: 1.5
+  - m_Wave: 3
+    m_Enemy: {fileID: 11400000, guid: a6fe10b5d4d276340b1edb3b349e643c, type: 2}
+    m_Amount: 15
+    m_SpawnSpeed: 1
+  - m_Wave: 5
+    m_Enemy: {fileID: 11400000, guid: a6fe10b5d4d276340b1edb3b349e643c, type: 2}
+    m_Amount: 20
+    m_SpawnSpeed: 1
+  - m_Wave: 6
+    m_Enemy: {fileID: 11400000, guid: a6fe10b5d4d276340b1edb3b349e643c, type: 2}
+    m_Amount: 20
+    m_SpawnSpeed: 0.5
+  - m_Wave: 8
+    m_Enemy: {fileID: 11400000, guid: a6fe10b5d4d276340b1edb3b349e643c, type: 2}
+    m_Amount: 20
+    m_SpawnSpeed: 1
+  - m_Wave: 9
+    m_Enemy: {fileID: 11400000, guid: a6fe10b5d4d276340b1edb3b349e643c, type: 2}
+    m_Amount: 30
+    m_SpawnSpeed: 0.5
+  - m_Wave: 11
+    m_Enemy: {fileID: 11400000, guid: 78b4e19651e657941af9b35c9e24ec10, type: 2}
+    m_Amount: 5
+    m_SpawnSpeed: 2
+  - m_Wave: 12
+    m_Enemy: {fileID: 11400000, guid: 78b4e19651e657941af9b35c9e24ec10, type: 2}
+    m_Amount: 10
+    m_SpawnSpeed: 2
+  - m_Wave: 12
+    m_Enemy: {fileID: 11400000, guid: a6fe10b5d4d276340b1edb3b349e643c, type: 2}
+    m_Amount: 15
+    m_SpawnSpeed: 0.8

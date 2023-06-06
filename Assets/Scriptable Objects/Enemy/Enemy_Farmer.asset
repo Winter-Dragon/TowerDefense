@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6429c6b75aa2ab4297d28649fe873e5, type: 3}
+  m_Name: Enemy_Farmer
+  m_EditorClassIdentifier: 
+  m_WalkAnimations:
+  - {fileID: 21300000, guid: 0d71fa44e95ff5049b0d5be635f8934d, type: 3}
+  - {fileID: 21300000, guid: ff2da110b5698234bae99cfb0aac985e, type: 3}
+  - {fileID: 21300000, guid: ebc1a7516ce0fe843b194ad58d42d199, type: 3}
+  - {fileID: 21300000, guid: 584b8f3005c1c0f41acfc3609e74def4, type: 3}
+  m_AttackAnimations:
+  - {fileID: 21300000, guid: d129b28c76290874997a99ed74cf476c, type: 3}
+  - {fileID: 21300000, guid: 3775352a2a2c3484b8e48f1da221decc, type: 3}
+  - {fileID: 21300000, guid: 8dd8eff58d6ca3e488e34f3d1e8a749c, type: 3}
+  - {fileID: 21300000, guid: bdc8e4ab7aa9297459a2077544e02b9a, type: 3}
+  m_HitPoints: 70
+  m_Armor: 0
+  m_MoveSpeed: 1
+  m_LivesCost: 1
+  m_GoldCost: 10
+  m_SpriteScale: {x: 0.5, y: 0.5}
+  m_ColliderSize: {x: 0.3, y: 0.5}

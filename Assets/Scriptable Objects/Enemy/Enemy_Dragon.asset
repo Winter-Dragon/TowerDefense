@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6429c6b75aa2ab4297d28649fe873e5, type: 3}
+  m_Name: Enemy_Dragon
+  m_EditorClassIdentifier: 
+  m_WalkAnimations:
+  - {fileID: 21300000, guid: cb73d0be4c1be2a45b58a3bbc0f2d483, type: 3}
+  - {fileID: 21300000, guid: 3138846947ef0ac47b114169609a8845, type: 3}
+  - {fileID: 21300000, guid: 62ebfd4e10e3b3c4a8f9f00f4f62cdf9, type: 3}
+  - {fileID: 21300000, guid: b0f761ea353b547419a39e3ba0ec67b2, type: 3}
+  m_AttackAnimations:
+  - {fileID: 21300000, guid: b798acc753939d64c95383ff33dc6033, type: 3}
+  - {fileID: 21300000, guid: 5d3493c7e53fbcf4ba42128e3444fe0a, type: 3}
+  - {fileID: 21300000, guid: f45315a05a008a4488acd163c1f88ced, type: 3}
+  - {fileID: 21300000, guid: 746fab6c8c221c6498720fdf53eac5d3, type: 3}
+  m_HitPoints: 800
+  m_Armor: 0
+  m_MoveSpeed: 0.5
+  m_LivesCost: 3
+  m_GoldCost: 200
+  m_SpriteScale: {x: 2, y: 1.5}
+  m_ColliderSize: {x: 1.8, y: 1.3}
