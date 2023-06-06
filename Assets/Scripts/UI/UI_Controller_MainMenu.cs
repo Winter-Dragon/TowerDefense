@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +21,12 @@ public class UI_Controller_MainMenu : Singleton<UI_Controller_MainMenu>
 
     private void Start()
     {
-        // if (Saver<UI_Controller_MainMenu>.HasFile())
+        /*
+        if (Saver<UI_Controller_MainMenu>.HasFile())
+        {
+
+        }
+        */
     }
 
     #endregion

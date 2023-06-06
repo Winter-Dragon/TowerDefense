@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -21,6 +19,7 @@ namespace TowerDefense
 
         #endregion
 
+
         #region Public API
 
         /// <summary>
@@ -28,12 +27,14 @@ namespace TowerDefense
         /// </summary>
         public override void OnPointerDown(PointerEventData eventData)
         {
+            // Проверка на точку постройки и интерфейс постройки.
             if (m_BuildSite == null) { Debug.Log("Build Site is null!"); return; }
             if (UI_Interface_BuyTower.Instance == null) { Debug.Log("UI_Interface_BuyTower.Instance == null!"); return; }
 
             // Задать точку постройки.
             UI_Interface_BuyTower.Instance.SetBuildSiteToAllElements(m_BuildSite);
 
+            // Вызов события клика из метода родителя.
             InvokeEvent();
         }
 

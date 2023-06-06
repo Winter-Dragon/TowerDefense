@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -25,33 +23,30 @@ public class AnimateSpriteFrames : AnimationBase
 
     #region Protected API
 
-    #region Animators
-
     /// <summary>
-    /// 
+    /// Переопределяемый метод изменения фреймов анимации.
     /// </summary>
     protected override void AnimateFrame()
     {
+        // Вычисляется целое значение порядкового номера спрайта.
         int frame = System.Convert.ToInt32(NormalizedAnimationTime * (m_Frames.Length - 1));
+
+        // Назначается спрайт.
         m_Renderer.sprite = m_Frames[frame];
     }
 
-    protected override void OnAnimationEnd()
-    {
-            
-    }
-
-    protected override void OnAnimationStart()
-    {
-            
-    }
-
-    public override void PrepareAnimation()
-    {
-            
-    }
-
-    #endregion
+    /// <summary>
+    /// Переопределяемый метод при завершении анимации.
+    /// </summary>
+    protected override void OnAnimationEnd() { }
+    /// <summary>
+    /// Переопределяемый метод при старте анимации.
+    /// </summary>
+    protected override void OnAnimationStart() { }
+    /// <summary>
+    /// Переопределение метода подготовки к анимации.
+    /// </summary>
+    public override void PrepareAnimation() { }
 
     #endregion
 
@@ -68,4 +63,5 @@ public class AnimateSpriteFrames : AnimationBase
     }
 
     #endregion
+
 }

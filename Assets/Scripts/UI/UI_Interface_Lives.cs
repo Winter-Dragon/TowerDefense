@@ -35,7 +35,6 @@ namespace TowerDefense
 
                 Player.OnLiveUpdate += UpdateLiveText;
             }
-                
             else Debug.Log("Player.Instance is null!");
         }
 

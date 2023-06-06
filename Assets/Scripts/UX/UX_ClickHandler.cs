@@ -1,16 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 
 namespace TowerDefense
 {
-    /// <summary>
-    /// Делегат обработки кликов.
-    /// </summary>
-    public delegate void ClickToBuildSite();
-
     /// <summary>
     /// Класс, отвечающий за обработку нажатий на Build Site.
     /// </summary>
@@ -22,7 +15,7 @@ namespace TowerDefense
         /// <summary>
         /// Событие клика.
         /// </summary>
-        public event ClickToBuildSite OnClicked;
+        public event EmptyDelegate OnClicked;
 
         #endregion
 

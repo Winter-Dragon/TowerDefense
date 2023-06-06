@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace TowerDefense
 {
-
     /// <summary>
     /// Класс, задающий характеристики туррелям. Работает из редактора, нельзя поставить на сцену.
     /// </summary>

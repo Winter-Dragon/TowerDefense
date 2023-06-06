@@ -1,15 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace TowerDefense
 {
-    /// <summary>
-    /// Пустой делегат смерти объекта.
-    /// </summary>
-    public delegate void OnObjectDeath();
-
     /// <summary>
     /// Уничтожаемый объект на сцене, имеет HP.
     /// </summary>
@@ -36,7 +29,7 @@ namespace TowerDefense
         /// <summary>
         /// События, выполняющиеся после смерти объекта.
         /// </summary>
-        public event OnObjectDeath EventsOnDeath;
+        public event EmptyDelegate EventsOnDeath;
 
         /// <summary>
         /// Константа нейтральной команды - 0.

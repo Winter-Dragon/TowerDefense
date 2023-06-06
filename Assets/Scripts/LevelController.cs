@@ -1,19 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace TowerDefense
 {
     /// <summary>
-    /// Делегат изменения текущей волны.
-    /// </summary>
-    /// <param name="wave">Новое значение текущей волны.</param>
-    public delegate void WaveUpdate(int wave);
-
-    /// <summary>
     /// Класс, проверяющий, все ли условия для завершения уровня выполнены.
-    /// Условия должны соделжать интерфейс ILevelCondition и быть дочерними к данному объекту.
     /// </summary>
     public class LevelController : Singleton<LevelController>
     {
@@ -38,11 +28,6 @@ namespace TowerDefense
         private int m_CurrentWave;
 
         /// <summary>
-        /// Событие, срабатывающее когда уровень завершён.
-        /// </summary>
-        private UnityEvent m_EventLevelCompleted;
-
-        /// <summary>
         /// Текущее пройденное время.
         /// </summary>
         private float m_LevelTime;
@@ -50,7 +35,7 @@ namespace TowerDefense
         /// <summary>
         /// Событие изменения номера волны.
         /// </summary>
-        public static event WaveUpdate OnWaveUpdate;
+        public static event IntToVoidDelegate OnWaveUpdate;
 
         #region Links
 

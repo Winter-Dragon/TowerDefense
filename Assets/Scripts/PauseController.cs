@@ -1,18 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace TowerDefense
 {
-
     /// <summary>
-    /// Делегат паузы.
-    /// </summary>
-    /// <param name="paused">true - пауза, false - возобновление.</param>
-    public delegate void OnApplicationPaused(bool paused);
-
-    /// <summary>
-    /// 
+    /// Класс, вызывающий и обрабатывающий событие паузы.
     /// </summary>
     public class PauseController : Singleton<PauseController>
     {
@@ -22,18 +11,23 @@ namespace TowerDefense
         /// <summary>
         /// Событие паузы.
         /// </summary>
-        public static event OnApplicationPaused OnPaused;
+        public static event BoolDelegate OnPaused;
 
         #endregion
 
+
         #region Public Events
 
-
+        /// <summary>
+        /// Вызывает событие паузы.
+        /// </summary>
+        /// <param name="pause">True - пауза, false - возобновление.</param>
         public void Pause(bool pause)
         {
             OnPaused?.Invoke(pause);
         }
 
         #endregion
+
     }
 }

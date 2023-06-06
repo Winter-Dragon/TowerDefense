@@ -1,9 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
 
+/// <summary>
+/// Глобальный класс, работающий с классами. Может сохранять и загружать файлы с помощью JSON.
+/// </summary>
+/// <typeparam name="T">Тип класса.</typeparam>
 [Serializable]
 public class Saver<T>
 {
@@ -16,6 +18,7 @@ public class Saver<T>
     public T data;
 
     #endregion
+
 
     #region Private API
 

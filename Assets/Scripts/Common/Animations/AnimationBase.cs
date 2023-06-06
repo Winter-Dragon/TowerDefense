@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -35,12 +33,12 @@ public abstract class AnimationBase : MonoBehaviour
     /// <summary>
     /// Событие старта анимации.
     /// </summary>
-    private UnityEvent m_EventStart;
+    public event EmptyDelegate OnEventStart;
 
     /// <summary>
     /// Событие конца анимации.
     /// </summary>
-    private UnityEvent m_EventEnd;
+    public event EmptyDelegate OnEventEnd;
 
     /// <summary>
     /// Приватный флаг, отображающий проигрывается ли анимация.
@@ -70,16 +68,6 @@ public abstract class AnimationBase : MonoBehaviour
             return m_Reverse ? (1.0f - t) : t;
         }
     }
-
-    /// <summary>
-    /// Ссылка на эвент старта анимации.
-    /// </summary>
-    public UnityEvent OnEventStart => m_EventStart;
-
-    /// <summary>
-    /// Ссылка на эвент конца анимации.
-    /// </summary>
-    public UnityEvent OnEventEnd => m_EventEnd;
 
     #endregion
 
@@ -136,15 +124,20 @@ public abstract class AnimationBase : MonoBehaviour
     /// <param name="prepare">true если нужна подготовка к анимации.</param>
     public void StartAnimation(bool prepare = true)
     {
+        // Если анимация уже проигрывается - выйти.
         if (m_IsAnimationPlaying) return;
 
+        // Если есть подготовка к анимации - запустить.
         if (prepare) PrepareAnimation();
 
+        // Флаг проигрывания анимации true.
         m_IsAnimationPlaying = true;
 
+        // Метод старта анимации.
         OnAnimationStart();
 
-        m_EventStart?.Invoke();
+        // Вызов события старта анимации.
+        OnEventStart?.Invoke();
     }
 
     /// <summary>
@@ -152,25 +145,41 @@ public abstract class AnimationBase : MonoBehaviour
     /// </summary>
     public void StopAnimation()
     {
+        // Если анимация приостановлена - выйти.
         if (!m_IsAnimationPlaying) return;
 
+        // Флаг проигрывания анимации false.
         m_IsAnimationPlaying = false;
 
+        // Метод завершения анимации.
         OnAnimationEnd();
 
-        m_EventEnd?.Invoke();
+        // Вызов события конца анимации.
+        OnEventEnd?.Invoke();
     }
 
     #endregion
+
+
+    #region Abstract API
 
     /// <summary>
     /// Анимируем текущий фрейм анимации.
     /// </summary>
     protected abstract void AnimateFrame();
+    /// <summary>
+    /// Действия при старте анимации.
+    /// </summary>
     protected abstract void OnAnimationStart();
+    /// <summary>
+    /// Действия при завершении анимации.
+    /// </summary>
     protected abstract void OnAnimationEnd();
     /// <summary>
     /// Подготовка начального состояния анимации.
     /// </summary>
     public abstract void PrepareAnimation();
+
+    #endregion
+
 }

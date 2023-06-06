@@ -1,9 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace TowerDefense
 {
+    /// <summary>
+    /// Класс, хранящий в себе маршрут движения врагов в виде объектов с классом CircleArea.
+    /// </summary>
     public class EnemyRoute : MonoBehaviour
     {
 
@@ -24,5 +26,6 @@ namespace TowerDefense
         #endregion
 
         #endregion
+
     }
 }

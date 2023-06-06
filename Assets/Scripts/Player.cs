@@ -1,16 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace TowerDefense
 {
-    /// <summary>
-    /// Делегат изменения ресурсов у игрока.
-    /// </summary>
-    /// <param name="value">Новое значение ресурсов игрока.</param>
-    public delegate void ResourcesUpdate(int value);
-
     /// <summary>
     /// Базовый класс игрока.
     /// </summary>
@@ -32,12 +23,12 @@ namespace TowerDefense
         /// <summary>
         /// Событие изменения золота у игрока.
         /// </summary>
-        public static event ResourcesUpdate OnGoldUpdate;
+        public static event IntToVoidDelegate OnGoldUpdate;
 
         /// <summary>
         /// Событие изменения жизней у игрока.
         /// </summary>
-        public static event ResourcesUpdate OnLiveUpdate;
+        public static event IntToVoidDelegate OnLiveUpdate;
 
         /// <summary>
         /// Текущее количество жизней.
@@ -78,13 +69,6 @@ namespace TowerDefense
             OnGoldUpdate?.Invoke(m_Gold);
             OnLiveUpdate?.Invoke(m_CurrentLives);
         }
-
-        #endregion
-
-
-        #region private API
-
-
 
         #endregion
 

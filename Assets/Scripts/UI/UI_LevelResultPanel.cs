@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace TowerDefense
@@ -66,7 +64,7 @@ namespace TowerDefense
         /// <param name="isLevelCompleted">Результат прохождения уровня.</param>
         public void DisplayLevelResult(bool isLevelCompleted)
         {
-            // отобразить нужное окно.
+            // Отобразить нужное окно.
             if (isLevelCompleted) m_WinPanel.gameObject.SetActive(true);
             else m_LosePanel.gameObject.SetActive(true);
 

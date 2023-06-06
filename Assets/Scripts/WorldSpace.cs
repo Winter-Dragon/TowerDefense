@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace TowerDefense
@@ -24,6 +22,7 @@ namespace TowerDefense
 
         private void Start()
         {
+            // Подписываемся на событие клика.
             m_UX.OnClicked += ClickToWorldSpace;
         }
 

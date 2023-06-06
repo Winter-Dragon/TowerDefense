@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -24,6 +22,7 @@ namespace TowerDefense
         private int m_WavesCount;
 
         #endregion
+
 
         #region Unity Events
 
@@ -60,5 +59,6 @@ namespace TowerDefense
         }
 
         #endregion
+
     }
 }
