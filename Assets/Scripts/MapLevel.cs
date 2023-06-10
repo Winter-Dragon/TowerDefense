@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,6 +43,12 @@ namespace TowerDefense
 
             // Запросить сохранённый результат.
             SetLevelData();
+        }
+
+        private void OnDestroy()
+        {
+            // Отписаться от события клика.
+            m_UX.OnClicked -= StartLevel;
         }
 
         #endregion

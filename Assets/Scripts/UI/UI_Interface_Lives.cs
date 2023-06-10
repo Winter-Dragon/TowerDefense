@@ -38,6 +38,12 @@ namespace TowerDefense
             else Debug.Log("Player.Instance is null!");
         }
 
+        private void OnDestroy()
+        {
+            // Отписаться от события изменения жизней.
+            Player.OnLiveUpdate -= UpdateLiveText;
+        }
+
         #endregion
 
 

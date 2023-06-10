@@ -151,20 +151,6 @@ namespace TowerDefense
             PauseController.OnPaused += Paused;
         }
 
-        private void FixedUpdate()
-        {
-            // Обновить все таймеры.
-            UpdateTimers();
-
-            // Обновить поведение ИИ.
-            UpdateAI();
-        }
-
-        #endregion
-
-
-        #region Protected API
-
         /// <summary>
         /// Действия при уничтожении объекта.
         /// </summary>
@@ -175,6 +161,15 @@ namespace TowerDefense
 
             // Отписаться от события паузы.
             PauseController.OnPaused -= Paused;
+        }
+
+        private void FixedUpdate()
+        {
+            // Обновить все таймеры.
+            UpdateTimers();
+
+            // Обновить поведение ИИ.
+            UpdateAI();
         }
 
         #endregion

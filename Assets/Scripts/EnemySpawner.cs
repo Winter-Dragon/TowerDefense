@@ -129,6 +129,15 @@ namespace TowerDefense
             PauseController.OnPaused += Paused;
         }
 
+        private void OnDestroy()
+        {
+            // Отписаться от события паузы.
+            PauseController.OnPaused -= Paused;
+
+            // Убрать текущий спавнер из списка.
+            m_AllSpawners.Remove(this);
+        }
+
         private void FixedUpdate()
         {
             // Обновляет таймер.

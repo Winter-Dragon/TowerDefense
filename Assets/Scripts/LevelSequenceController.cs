@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -69,6 +67,15 @@ namespace TowerDefense
         public void LoadLevelMapScene()
         {
             SceneManager.LoadScene(LevelMapSceneNickName);
+        }
+
+        /// <summary>
+        /// Перезапускает текущий уровень.
+        /// </summary>
+        public void RestartCurrentLevel()
+        {
+            if (m_CurrentLevel != null) SceneManager.LoadScene(m_CurrentLevel.LevelName);
+            else Debug.Log("Current level not assigned!");
         }
 
         #endregion

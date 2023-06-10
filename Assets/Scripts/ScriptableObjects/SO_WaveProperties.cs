@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace TowerDefense
 {
     /// <summary>
     /// Класс, настраивающий отдельные волны на уровне: указывет тип врага, волна, на которой он появится, его кол-во и скорость спавна.
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class WaveList
     {
         [SerializeField] private int m_Wave;

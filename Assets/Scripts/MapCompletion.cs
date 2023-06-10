@@ -14,6 +14,11 @@ namespace TowerDefense
         #region Properties and Components
 
         /// <summary>
+        /// Строка название файла для сохранения результатов.
+        /// </summary>
+        const string filename = "completion.dat";
+
+        /// <summary>
         /// Сохранялка конкретного уровня.
         /// </summary>
         [Serializable]
@@ -33,14 +38,20 @@ namespace TowerDefense
         /// <summary>
         /// Массив с прохождением уровней.
         /// </summary>
-        private List <LevelScore> completionData = new List<LevelScore>();
+        private List <LevelScore> completionData = new();
 
         #endregion
 
 
         #region Unity Events
 
-        
+        private new void Awake()
+        {
+            base.Awake();
+
+            // Попытка загрузить данные.
+            Saver<List<LevelScore>>.TryLoad(filename, ref completionData);
+        }
 
         #endregion
 
@@ -61,7 +72,7 @@ namespace TowerDefense
             foreach (LevelScore item in completionData)
             {
                 // Если уровень совпадает с текущим уровнем.
-                if (item.Level == LevelSequenceController.Instance.CurrentLevel)
+                if (item.Level == level)
                 {
                     // Если кол-во звёзд на уровне больше - перезаписывает значение.
                     if (levelStars > item.LevelStars) item.LevelStars = levelStars;
@@ -75,15 +86,19 @@ namespace TowerDefense
             if (!saveResult)
             {
                 // Создаётся новыя сохранялка.
-                LevelScore newLevelScore = new LevelScore();
-
-                // Записываются значения уровня.
-                newLevelScore.Level = LevelSequenceController.Instance.CurrentLevel;
-                newLevelScore.LevelStars = levelStars;
+                LevelScore newLevelScore = new()
+                {
+                    // Записываются значения уровня.
+                    Level = LevelSequenceController.Instance.CurrentLevel,
+                    LevelStars = levelStars
+                };
 
                 // Уровень добавляется в массив.
                 completionData.Add(newLevelScore);
             }
+
+            // Сохранение данных.
+            Saver<List<LevelScore>>.Save(filename, completionData);
         }
 
         #endregion

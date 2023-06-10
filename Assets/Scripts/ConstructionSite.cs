@@ -22,7 +22,14 @@ namespace TowerDefense
 
         private void Start()
         {
+            // Подписка на событие клика.
             m_UX.OnClicked += ClickEvent;
+        }
+
+        private void OnDestroy()
+        {
+            // Отписаться от события клика.
+            m_UX.OnClicked -= ClickEvent;
         }
 
         #endregion

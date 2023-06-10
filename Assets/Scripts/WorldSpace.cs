@@ -26,6 +26,12 @@ namespace TowerDefense
             m_UX.OnClicked += ClickToWorldSpace;
         }
 
+        private void OnDestroy()
+        {
+            // Отписаться от события клика.
+            m_UX.OnClicked -= ClickToWorldSpace;
+        }
+
         #endregion
 
 

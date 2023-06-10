@@ -68,6 +68,11 @@ namespace TowerDefense
         /// </summary>
         public float LevelTime => m_LevelTime;
 
+        /// <summary>
+        /// Кол-во звёзд на уровне.
+        /// </summary>
+        public int LevelStars => m_LevelStars;
+
         #endregion
 
         #endregion
@@ -119,14 +124,14 @@ namespace TowerDefense
         public void SpawnCompleted()
         {
             if (EnemySpawner.AllSpawners == null || EnemySpawner.AllSpawners.Count == 0) { Debug.Log("EnemySpawner.AllSpawners is null!"); return; }
-
+            
             // Прохождение циклом по всем спавнерам.
             foreach (EnemySpawner spawner in EnemySpawner.AllSpawners)
             {
                 // Если спавн не завершён - выйти из метода.
                 if (spawner.Mode != SpawnMode.Completed) return;
             }
-
+            
             // Интерфейс следующей волны включён.
             if (UI_Interface_NextWave.Instance == null) { Debug.Log("UI_Interface_NextWave.Instance == null!"); }
             else UI_Interface_NextWave.Instance.gameObject.SetActive(true);

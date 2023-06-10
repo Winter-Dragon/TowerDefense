@@ -44,6 +44,12 @@ namespace TowerDefense
             WaveUpdate(LevelController.Instance.CurrentWave);
         }
 
+        private void OnDestroy()
+        {
+            // Отписаться от события изменения волны.
+            LevelController.OnWaveUpdate -= WaveUpdate;
+        }
+
         #endregion
 
 

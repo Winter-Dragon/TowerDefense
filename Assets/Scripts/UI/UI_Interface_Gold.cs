@@ -36,6 +36,12 @@ namespace TowerDefense
             else Debug.Log("Player.Instance is null!");
         }
 
+        private void OnDestroy()
+        {
+            // Отписаться от события изменения золота.
+            Player.OnGoldUpdate -= UpdateGoldText;
+        }
+
         #endregion
 
 

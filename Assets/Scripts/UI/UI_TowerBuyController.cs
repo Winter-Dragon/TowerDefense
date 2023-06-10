@@ -117,6 +117,15 @@ namespace TowerDefense
             gameObject.SetActive(false);
         }
 
+        private void OnDestroy()
+        {
+            // Отписаться от события клика на кнопку.
+            m_Button.onClick.RemoveListener(ClickToButton);
+
+            // Отписаться от события отслеживания состояния золота.
+            Player.OnGoldUpdate -= UpdateState;
+        }
+
         #endregion
 
 

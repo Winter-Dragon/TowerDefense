@@ -25,7 +25,7 @@ namespace TowerDefense
         /// <summary>
         /// Список врагов, вошедших в радиус башни.
         /// </summary>
-        private List<Enemy> m_Enemy = new List<Enemy>();
+        private List<Enemy> m_Enemy = new();
 
         /// <summary>
         /// Коллайдер башни.
@@ -77,6 +77,12 @@ namespace TowerDefense
 
             // Подписываемся на событие паузы.
             PauseController.OnPaused += Paused;
+        }
+
+        private void OnDestroy()
+        {
+            // Отписаться от события паузы.
+            PauseController.OnPaused -= Paused;
         }
 
         private void FixedUpdate()

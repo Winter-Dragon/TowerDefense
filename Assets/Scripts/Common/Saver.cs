@@ -38,7 +38,7 @@ public class Saver<T>
     #region Public API
 
     /// <summary>
-    /// Загрузить файл.
+    /// Сохрнанить файл.
     /// </summary>
     /// <param name="filename">Имя файла.</param>
     /// <param name="data">Тип файла (класс).</param>
@@ -48,7 +48,7 @@ public class Saver<T>
         Saver<T> wrapper = new Saver<T> { data = data };
 
         // Создать строчку для сохранения в формате Json.
-        string dataString = JsonUtility.ToJson(data);
+        string dataString = JsonUtility.ToJson(wrapper);
 
         // Локально сохраняем полный путь к файлу.
         string path = Path(filename);
@@ -58,7 +58,7 @@ public class Saver<T>
     }
 
     /// <summary>
-    /// Сохранить файл.
+    /// Загрузить файл.
     /// </summary>
     /// <param name="filename">Имя файла.</param>
     /// <param name="data">Тип файла (класс).</param>
