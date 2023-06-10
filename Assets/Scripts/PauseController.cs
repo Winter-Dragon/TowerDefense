@@ -16,7 +16,7 @@ namespace TowerDefense
         #endregion
 
 
-        #region Public Events
+        #region Public API
 
         /// <summary>
         /// Вызывает событие паузы.

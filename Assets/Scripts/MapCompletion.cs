@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +15,7 @@ namespace TowerDefense
         /// <summary>
         /// Строка название файла для сохранения результатов.
         /// </summary>
-        const string filename = "completion.dat";
+        public const string filename = "completion.dat";
 
         /// <summary>
         /// Сохранялка конкретного уровня.
@@ -47,6 +46,7 @@ namespace TowerDefense
 
         private new void Awake()
         {
+            // Базовый метод от Singleton.
             base.Awake();
 
             // Попытка загрузить данные.
@@ -156,6 +156,18 @@ namespace TowerDefense
 
             // Если уровень не был записан - возвращает false.
             return false;
+        }
+
+        /// <summary>
+        /// Удалить сохранённые данные.
+        /// </summary>
+        public static void ResetSavedData()
+        {
+            // Очистить текущий список.
+            Instance.completionData.Clear();
+
+            // Удалить сохранённый файл.
+            Saver<List<LevelScore>>.Reset(filename);
         }
 
         #endregion

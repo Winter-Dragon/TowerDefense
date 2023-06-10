@@ -45,7 +45,7 @@ public class Saver<T>
     public static void Save(string filename, T data)
     {
         // Создать локальную обёртку данных, чтобы Json корректно сохранил данные.
-        Saver<T> wrapper = new Saver<T> { data = data };
+        Saver<T> wrapper = new(){ data = data };
 
         // Создать строчку для сохранения в формате Json.
         string dataString = JsonUtility.ToJson(wrapper);
@@ -105,7 +105,11 @@ public class Saver<T>
     /// <returns>true если файл есть, false если файла нет.</returns>
     public static bool HasFile(string filename)
     {
-        return File.Exists(filename);
+        // Локально сохраняем полный путь к файлу.
+        string path = Path(filename);
+
+        // Возвращает true если файл есть.
+        return File.Exists(path);
     }
 
     #endregion

@@ -23,12 +23,8 @@ namespace TowerDefense
 
         private void Start()
         {
-            /*
-            if (Saver<UI_Controller_MainMenu>.HasFile())
-            {
-
-            }
-            */
+            // Кнопка продолжить активна только если есть файл с сохранением.
+            m_ButtonContinue.interactable = Saver<UI_Controller_MainMenu>.HasFile(MapCompletion.filename);
         }
 
         #endregion
@@ -41,17 +37,23 @@ namespace TowerDefense
         /// </summary>
         public void StartNewGame()
         {
+            // Удаление сохранённого файла.
+            if (MapCompletion.Instance != null) MapCompletion.ResetSavedData();
+            else Debug.Log("MapCompletion.Instance == null!");
+
             // Запуск карты уровней.
             if (LevelSequenceController.Instance != null) LevelSequenceController.Instance.LoadLevelMapScene();
             else Debug.Log("LevelSequenceController.Instance == null!");
-    }
+        }
 
         /// <summary>
         /// Метод, загружающий прошлую игру.
         /// </summary>
         public void ContinueGame()
         {
-
+            // Запуск карты уровней.
+            if (LevelSequenceController.Instance != null) LevelSequenceController.Instance.LoadLevelMapScene();
+            else Debug.Log("LevelSequenceController.Instance == null!");
         }
 
         /// <summary>

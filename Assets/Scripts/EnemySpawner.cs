@@ -87,6 +87,11 @@ namespace TowerDefense
         /// </summary>
         private static HashSet<EnemySpawner> m_AllSpawners;
 
+        /// <summary>
+        /// Сохранённый режим спавна до паузы.
+        /// </summary>
+        private SpawnMode m_SpawnModeUntilPause;
+
         #region Links
 
         /// <summary>
@@ -300,8 +305,13 @@ namespace TowerDefense
         /// <param name="pause">true - пауза, false - возобновление.</param>
         private void Paused(bool pause)
         {
-            if (pause) m_Mode = SpawnMode.Pause;
-            else m_Mode = SpawnMode.Spawn;
+            // Если пауза - спавн в паузу, прошлый спавнмод сохраняется.
+            if (pause)
+            {
+                m_SpawnModeUntilPause = m_Mode;
+                m_Mode = SpawnMode.Pause;
+            }
+            else m_Mode = m_SpawnModeUntilPause;
         }
 
         #endregion

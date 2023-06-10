@@ -43,7 +43,7 @@ namespace TowerDefense
         /// <summary>
         /// Массив, настраивающий волны на уровне.
         /// </summary>
-        [SerializeField] private List<WaveList> m_Waves = new List<WaveList>();
+        [SerializeField] private List<WaveList> m_Waves = new();
 
         #region Links
 
@@ -77,7 +77,7 @@ namespace TowerDefense
         public List<SO_Enemy> GetEnemyInWave(int wave)
         {
             // Созание списка настроек врагов.
-            List<SO_Enemy> enemyList = new List<SO_Enemy>();
+            List<SO_Enemy> enemyList = new();
 
             // Прохождение по массиву волн.
             for(int i = 0; i < m_Waves.Count; i++)
@@ -110,7 +110,7 @@ namespace TowerDefense
         public List<int> GetEnemyAmountInWave(int wave)
         {
             // Создание массива с кол-вом.
-            List<int> enemyAmount = new List<int>();
+            List<int> enemyAmount = new();
 
             // Прохождение по массиву волн.
             for (int i = 0; i < m_Waves.Count; i++)
@@ -143,7 +143,7 @@ namespace TowerDefense
         public List<float> GetEnemySpawnSpeed(int wave)
         {
             // Создание массива со скоростью спавна каждого врага.
-            List<float> enemySpawnTime = new List<float>();
+            List<float> enemySpawnTime = new();
 
             // Прохождение по массиву волн.
             for (int i = 0; i < m_Waves.Count; i++)
