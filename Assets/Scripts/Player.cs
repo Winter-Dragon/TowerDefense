@@ -99,10 +99,7 @@ namespace TowerDefense
                 // обнуление жизней.
                 m_CurrentLives = 0;
 
-                // Проверка на наличие контроллёра результатов уровня.
-                if (UI_LevelResultPanel.Instance == null) { Debug.Log("UI_LevelResultPanel.Instance == null!"); return; }
-                // Вызов поражения уровня.
-                UI_LevelResultPanel.Instance.DisplayLevelResult(false);
+                LevelController.Instance.CompleteLevel(false);
             }
 
             // Вызов события изменения HP.

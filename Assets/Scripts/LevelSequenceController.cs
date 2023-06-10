@@ -23,18 +23,52 @@ namespace TowerDefense
         /// </summary>
         public static string LevelMapSceneNickName = "scene_LevelMap";
 
+        /// <summary>
+        /// Текущий уровень.
+        /// </summary>
+        private SO_Level m_CurrentLevel;
+
+        #region Links
+
+        /// <summary>
+        /// Текущий уровень.
+        /// </summary>
+        public SO_Level CurrentLevel => m_CurrentLevel;
+
+        #endregion
+
         #endregion
 
 
         #region Public API
 
         /// <summary>
-        /// Загружает уровень с указанным названием.
+        /// Загружает уровень.
         /// </summary>
-        /// <param name="level">Название сцены.</param>
-        public void LoadLevel(string level)
+        /// <param name="level">Уровень для загрузки.</param>
+        public void LoadLevel(SO_Level level)
         {
-            SceneManager.LoadScene(level);
+            // Локально запоминает текущий уровень.
+            m_CurrentLevel = level;
+
+            // Загрузка уровня.
+            SceneManager.LoadScene(level.LevelName);
+        }
+
+        /// <summary>
+        /// Загрузить сцену главного меню.
+        /// </summary>
+        public void LoadMainMenuScene()
+        {
+            SceneManager.LoadScene(MainMenuSceneNickName);
+        }
+
+        /// <summary>
+        /// Загрузить сцену с картой уровней.
+        /// </summary>
+        public void LoadLevelMapScene()
+        {
+            SceneManager.LoadScene(LevelMapSceneNickName);
         }
 
         #endregion

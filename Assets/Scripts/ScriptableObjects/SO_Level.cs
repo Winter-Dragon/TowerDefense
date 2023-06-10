@@ -18,6 +18,11 @@ namespace TowerDefense
         /// </summary>
         [SerializeField] private string m_LevelName;
 
+        /// <summary>
+        /// Номер уровня.
+        /// </summary>
+        [SerializeField] private int m_LevelNumber;
+
         #region Links
 
         /// <summary>
@@ -25,8 +30,14 @@ namespace TowerDefense
         /// </summary>
         public string LevelName => m_LevelName;
 
+        /// <summary>
+        /// Номер уровня.
+        /// </summary>
+        public int LevelNumber => m_LevelNumber;
+
         #endregion
 
         #endregion
+
     }
 }

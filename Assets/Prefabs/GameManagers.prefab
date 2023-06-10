@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3743625285567564437}
   - component: {fileID: 3743625285567564394}
   - component: {fileID: 3743625285567564395}
+  - component: {fileID: 2575703024844451312}
   m_Layer: 0
   m_Name: GameManagers
   m_TagString: Untagged
@@ -62,3 +63,16 @@ MonoBehaviour:
   m_GoldTextColor: {r: 1, g: 0.62352943, b: 0.40784314, a: 1}
   m_GoldTextColorUnactive: {r: 0.3254902, g: 0.19607843, b: 0.09803922, a: 1}
   m_GoldImageColorUnactive: {r: 0.34117648, g: 0.34117648, b: 0.34117648, a: 1}
+--- !u!114 &2575703024844451312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743625285567564392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47fa96c1b77d89f4d91c1493bc69f4db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DoNotDestroyOnLoad: 1

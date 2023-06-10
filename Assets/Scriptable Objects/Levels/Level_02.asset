@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Level_02
   m_EditorClassIdentifier: 
   m_LevelName: scene_level_02
+  m_LevelNumber: 2

@@ -40,6 +40,9 @@ namespace TowerDefense
             m_LosePanel.gameObject.SetActive(false);
             m_WinPanel.gameObject.SetActive(false);
 
+            // Подписаться на событие завершения уровня.
+            LevelController.LevelCompleted += LevelCompleted;
+
             // Выключить текущий объект.
             enabled = false;
         }
@@ -78,8 +81,21 @@ namespace TowerDefense
         /// <param name="isCompleted">Результат прохождения. true если уровень пройден.</param>
         public void LevelCompleted(bool isCompleted)
         {
-            // Записывается локально результат прохождения и мониторится список врагов.
+            // Записывается локально результат прохождения.
             isLevelCompleted = isCompleted;
+
+            // Если уровень закончился поражением - сразу вывести рещультаты и запустить паузу.
+            if (!isLevelCompleted)
+            {
+                DisplayLevelResult(isLevelCompleted);
+
+                if (PauseController.Instance != null) PauseController.Instance.Pause(true);
+                else Debug.Log("Pause Controller is null!");
+
+                return;
+            }
+
+            // Мониторится список врагов.
             enabled = true;
         }
 

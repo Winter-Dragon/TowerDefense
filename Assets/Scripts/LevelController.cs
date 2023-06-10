@@ -11,16 +11,15 @@ namespace TowerDefense
         #region Properties and Components
 
         /// <summary>
-        /// Текущий уровень.
-        /// </summary>
-        [Min(1)]
-        [SerializeField] private int m_CurrentLevel;
-
-        /// <summary>
         /// Кол-во волн на текущем уровне.
         /// </summary>
         [Min(1)]
         [SerializeField] private int m_NumberWaves;
+
+        /// <summary>
+        /// Текущий уровень.
+        /// </summary>
+        private int m_CurrentLevel;
 
         /// <summary>
         /// Текущая волна.
@@ -33,9 +32,19 @@ namespace TowerDefense
         private float m_LevelTime;
 
         /// <summary>
+        /// Кол-во звёзд на уровне.
+        /// </summary>
+        private int m_LevelStars = 0;
+
+        /// <summary>
         /// Событие изменения номера волны.
         /// </summary>
         public static event IntToVoidDelegate OnWaveUpdate;
+
+        /// <summary>
+        /// Событие завершения уровня.
+        /// </summary>
+        public static event BoolDelegate LevelCompleted;
 
         #region Links
 
@@ -68,6 +77,14 @@ namespace TowerDefense
 
         private void Start()
         {
+            // Записать текущий уровень.
+            if (LevelSequenceController.Instance != null)
+            {
+                if (LevelSequenceController.Instance.CurrentLevel != null) m_CurrentLevel = LevelSequenceController.Instance.CurrentLevel.LevelNumber;
+                else Debug.Log("Level in LevelSequenseController is null!");
+            }
+            else Debug.Log("LevelSequenseController is null!");
+
             // Текущая волна - 0.
             m_CurrentWave = 0;
         }
@@ -78,16 +95,17 @@ namespace TowerDefense
         #region Private API
 
         /// <summary>
-        /// Попробовать вывести результаты уровня.
+        /// Считает кол-во звёзд, набранное на уровне.
         /// </summary>
-        /// <param name="isCompleted">true если уровень пройден.</param>
-        private void CheckLevelResult(bool isCompleted)
+        private void CountLevelStars()
         {
-            // Проверка на панель результатов.
-            if (UI_LevelResultPanel.Instance == null) { Debug.Log("(UI_LevelResultPanel.Instance == null!"); return; }
+            // локально записывается кол-во ХП.
+            int hp = Player.Instance.CurrentLives;
 
-            // Передача информации в панель результатов.
-            UI_LevelResultPanel.Instance.LevelCompleted(isCompleted);
+            // Считает звёзды в зависимости от ХП.
+            if (hp < 10) m_LevelStars = 1;
+            if (hp >= 10 || hp < 18) m_LevelStars = 2;
+            if (hp >= 18) m_LevelStars = 3;
         }
 
         #endregion
@@ -100,7 +118,6 @@ namespace TowerDefense
         /// </summary>
         public void SpawnCompleted()
         {
-            // Проверка на наличие объектов в списке спавнеров.
             if (EnemySpawner.AllSpawners == null || EnemySpawner.AllSpawners.Count == 0) { Debug.Log("EnemySpawner.AllSpawners is null!"); return; }
 
             // Прохождение циклом по всем спавнерам.
@@ -115,6 +132,9 @@ namespace TowerDefense
             else UI_Interface_NextWave.Instance.gameObject.SetActive(true);
         }
 
+        /// <summary>
+        /// Запуск следующей волны врагов.
+        /// </summary>
         public void StartNextWave()
         {
             // Текущая волна++.
@@ -126,7 +146,7 @@ namespace TowerDefense
                 m_CurrentWave = m_NumberWaves;
 
                 // Вывести рещультаты уровня.
-                CheckLevelResult(true);
+                CompleteLevel(true);
                 return;
             }
             // Вызов события изменения номера волны.
@@ -141,6 +161,23 @@ namespace TowerDefense
                 // Запуск следующей волны спавна.
                 spawner.NextWave();
             }
+        }
+
+        /// <summary>
+        /// Завершить уровень.
+        /// </summary>
+        /// <param name="isCompleted">true если уровень пройден.</param>
+        public void CompleteLevel(bool isCompleted)
+        {
+            // Если уровень пройден - посчитать очки уровня.
+            if (isCompleted) CountLevelStars();
+
+            // Вызвать событие завершения уровня.
+            LevelCompleted?.Invoke(isCompleted);
+
+            // Записать результаты прохождения в карту уровней.
+            if (MapCompletion.Instance != null) MapCompletion.SaveLevelResult(isCompleted, m_LevelStars);
+            else Debug.Log("MapCompletion is null!");
         }
 
         #endregion

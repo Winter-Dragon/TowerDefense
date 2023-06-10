@@ -66,9 +66,11 @@ namespace TowerDefense
             m_Collider = GetComponent<CircleCollider2D>();
             m_Collider.radius = m_TurretProperties.Radius;
 
+            /*
             // Задать переменную аудиосурса и записать нужный клип из Turret Properties.
             m_AudioSource = GetComponent<AudioSource>();
             m_AudioSource.clip = m_TurretProperties.LaunchSFX;
+            */
 
             // Инициализация таймеров.
             InitTimers();

@@ -163,6 +163,23 @@ namespace TowerDefense
         #endregion
 
 
+        #region Protected API
+
+        /// <summary>
+        /// Действия при уничтожении объекта.
+        /// </summary>
+        protected override void OnDestroy()
+        {
+            // Выполнять базовый метод из Destructuble.
+            base.OnDestroy();
+
+            // Отписаться от события паузы.
+            PauseController.OnPaused -= Paused;
+        }
+
+        #endregion
+
+
         #region Private API
 
         #region Timers
