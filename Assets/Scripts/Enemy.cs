@@ -95,6 +95,11 @@ namespace TowerDefense
         /// </summary>
         private int m_LivesCost;
 
+        /// <summary>
+        /// Статичный эвент уничтожения врага.
+        /// </summary>
+        public static event EmptyDelegate EnemyDestroy;
+
         #region Timers
 
         /// <summary>
@@ -158,6 +163,9 @@ namespace TowerDefense
         {
             // Выполнять базовый метод из Destructuble.
             base.OnDestroy();
+
+            // Вызов события уничтожения врага.
+            EnemyDestroy?.Invoke();
 
             // Отписаться от события паузы.
             PauseController.OnPaused -= Paused;

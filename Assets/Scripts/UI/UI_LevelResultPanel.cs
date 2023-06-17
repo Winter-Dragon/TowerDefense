@@ -26,11 +26,6 @@ namespace TowerDefense
         /// </summary>
         [SerializeField] private Image[] m_ActiveStars;
 
-        /// <summary>
-        /// Локальная переменная, отображающая, завершён ли уровень.
-        /// </summary>
-        private bool isLevelCompleted;
-
         #endregion
 
 
@@ -49,25 +44,13 @@ namespace TowerDefense
             m_WinPanel.gameObject.SetActive(false);
 
             // Подписаться на событие завершения уровня.
-            LevelController.LevelCompleted += LevelCompleted;
-
-            // Выключить текущий объект.
-            enabled = false;
+            LevelController.LevelCompleted += DisplayLevelResult;
         }
 
         private void OnDestroy()
         {
             // Отписаться от события завершения уровня.
-            LevelController.LevelCompleted -= LevelCompleted;
-        }
-
-        private void FixedUpdate()
-        {
-            // Проверка, был ли создан список врагов.
-            if (Destructible.AllDestructibles == null) { Debug.Log("Destructible.AllDestructibles == null! Враги не были созданы."); enabled = false; return; }
-
-            // Если все враги уничтожены - отобразить результаты уровня.
-            if (Destructible.AllDestructibles.Count == 0) DisplayLevelResult(isLevelCompleted);
+            LevelController.LevelCompleted -= DisplayLevelResult;
         }
 
         #endregion
@@ -81,6 +64,9 @@ namespace TowerDefense
         /// <param name="isLevelCompleted">Результат прохождения уровня.</param>
         public void DisplayLevelResult(bool isLevelCompleted)
         {
+            if (PauseController.Instance != null) PauseController.Instance.Pause(true);
+            else Debug.Log("Pause Controller is null!");
+
             // Отобразить нужное окно.
             if (isLevelCompleted)
             {
@@ -93,33 +79,6 @@ namespace TowerDefense
                 if (levelStars > 2) m_ActiveStars[2].gameObject.SetActive(true);
             }
             else m_LosePanel.gameObject.SetActive(true);
-
-            // Выключить Update.
-            enabled = false;
-        }
-
-        /// <summary>
-        /// Вывести результаты уровня после того, как будут уничтожены все враги.
-        /// </summary>
-        /// <param name="isCompleted">Результат прохождения. true если уровень пройден.</param>
-        public void LevelCompleted(bool isCompleted)
-        {
-            // Записывается локально результат прохождения.
-            isLevelCompleted = isCompleted;
-
-            // Если уровень закончился поражением - сразу вывести рещультаты и запустить паузу.
-            if (!isLevelCompleted)
-            {
-                DisplayLevelResult(isLevelCompleted);
-
-                if (PauseController.Instance != null) PauseController.Instance.Pause(true);
-                else Debug.Log("Pause Controller is null!");
-
-                return;
-            }
-
-            // Мониторится список врагов.
-            enabled = true;
         }
 
         /// <summary>

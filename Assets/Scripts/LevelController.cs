@@ -92,12 +92,31 @@ namespace TowerDefense
 
             // Текущая волна - 0.
             m_CurrentWave = 0;
+
+            // Подписаться на событие завершения спавна волны.
+            EnemySpawner.WaveSpawnCompleted += SpawnCompleted;
+        }
+
+        private void OnDestroy()
+        {
+            // Отписаться от события завершения спавна волны.
+            EnemySpawner.WaveSpawnCompleted -= SpawnCompleted;
         }
 
         #endregion
 
 
         #region Private API
+
+        /// <summary>
+        /// Метод завершения спавна волны.
+        /// </summary>
+        private void SpawnCompleted()
+        {
+            // Интерфейс следующей волны включён.
+            if (UI_Interface_NextWave.Instance == null) { Debug.Log("UI_Interface_NextWave.Instance == null!"); }
+            else UI_Interface_NextWave.Instance.gameObject.SetActive(true);
+        }
 
         /// <summary>
         /// Считает кол-во звёзд, набранное на уровне.
@@ -108,8 +127,8 @@ namespace TowerDefense
             int hp = Player.Instance.CurrentLives;
 
             // Считает звёзды в зависимости от ХП.
-            if (hp < 10) m_LevelStars = 1;
-            if (hp >= 10 || hp < 18) m_LevelStars = 2;
+            if (hp < 8) m_LevelStars = 1;
+            if (hp >= 8 || hp < 18) m_LevelStars = 2;
             if (hp >= 18) m_LevelStars = 3;
         }
 
@@ -117,25 +136,6 @@ namespace TowerDefense
 
 
         #region Public API
-
-        /// <summary>
-        /// Метод, проверяющий, все ли спавнеры завершили спавн. Если все завершили - открывает интерфейс следующей волны.
-        /// </summary>
-        public void SpawnCompleted()
-        {
-            if (EnemySpawner.AllSpawners == null || EnemySpawner.AllSpawners.Count == 0) { Debug.Log("EnemySpawner.AllSpawners is null!"); return; }
-            
-            // Прохождение циклом по всем спавнерам.
-            foreach (EnemySpawner spawner in EnemySpawner.AllSpawners)
-            {
-                // Если спавн не завершён - выйти из метода.
-                if (spawner.Mode != SpawnMode.Completed) return;
-            }
-            
-            // Интерфейс следующей волны включён.
-            if (UI_Interface_NextWave.Instance == null) { Debug.Log("UI_Interface_NextWave.Instance == null!"); }
-            else UI_Interface_NextWave.Instance.gameObject.SetActive(true);
-        }
 
         /// <summary>
         /// Запуск следующей волны врагов.
@@ -149,23 +149,10 @@ namespace TowerDefense
             {
                 // Текущая волна - последняя волна.
                 m_CurrentWave = m_NumberWaves;
-
-                // Вывести рещультаты уровня.
-                CompleteLevel(true);
                 return;
             }
             // Вызов события изменения номера волны.
             OnWaveUpdate?.Invoke(CurrentWave);
-
-            // Проверка на наличие объектов в списке спавнеров.
-            if (EnemySpawner.AllSpawners == null || EnemySpawner.AllSpawners.Count == 0) { Debug.Log("EnemySpawner.AllSpawners is null!"); return; }
-
-            // Прохождение циклом по всем спавнерам.
-            foreach (EnemySpawner spawner in EnemySpawner.AllSpawners)
-            {
-                // Запуск следующей волны спавна.
-                spawner.NextWave();
-            }
         }
 
         /// <summary>

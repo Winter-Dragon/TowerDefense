@@ -92,6 +92,11 @@ namespace TowerDefense
         /// </summary>
         private SpawnMode m_SpawnModeUntilPause;
 
+        /// <summary>
+        /// Событие завершения спавна волны.
+        /// </summary>
+        public static event EmptyDelegate WaveSpawnCompleted;
+
         #region Links
 
         /// <summary>
@@ -127,17 +132,18 @@ namespace TowerDefense
             // Спавнмод в паузу.
             m_Mode = SpawnMode.Pause;
 
-            // Настройка спавнера.
-            TuneSpawner();
-
             // Подписаться на событие паузы.
             PauseController.OnPaused += Paused;
+            // Подписаться на событие изменения номера волны.
+            LevelController.OnWaveUpdate += NextWave;
         }
 
         private void OnDestroy()
         {
             // Отписаться от события паузы.
             PauseController.OnPaused -= Paused;
+            // Отписаться от события изменения номера волны.
+            LevelController.OnWaveUpdate -= NextWave;
 
             // Убрать текущий спавнер из списка.
             m_AllSpawners.Remove(this);
@@ -204,8 +210,8 @@ namespace TowerDefense
                         // Обнуление индекса.
                         m_CurrentEnemyIndex = 0;
 
-                        // Оповестить контроллёр о завершении спавна.
-                        LevelController.Instance.SpawnCompleted();
+                        // Завершить спавн текущего спавнера.
+                        SpawnCompleted();
 
                         return;
                     }
@@ -234,8 +240,8 @@ namespace TowerDefense
                             // Обнуление индекса.
                             m_CurrentEnemyIndex = 0;
 
-                            // Оповестить контроллёр о завершении спавна.
-                            LevelController.Instance.SpawnCompleted();
+                            // Завершить спавн текущего спавнера.
+                            SpawnCompleted();
 
                             return;
                         }
@@ -272,11 +278,9 @@ namespace TowerDefense
         /// <summary>
         /// Метод, сохраняющий локально настройки объекта спавна и их кол-во.
         /// </summary>
-        private void TuneSpawner()
+        /// <param name="currentWave">Номер текущей волны.</param>
+        private void TuneSpawner(int currentWave)
         {
-            // Проверка на LevelController.
-            if (LevelController.Instance == null) { Debug.Log("LevelController is null!"); return; }
-            // Проверка на LevelController.
             if (m_WaveProperties == null) { Debug.Log("WaveProperties is null!"); return; }
 
             // Из настроек волны берётся список врагов.
@@ -314,6 +318,21 @@ namespace TowerDefense
             else m_Mode = m_SpawnModeUntilPause;
         }
 
+        /// <summary>
+        /// Метод завершения спавна одним из спавнеров.
+        /// </summary>
+        private void SpawnCompleted()
+        {
+            // Проверка, все ли спавнеры завершили спавн.
+            foreach (EnemySpawner spawner in m_AllSpawners)
+            {
+                if (spawner.Mode != SpawnMode.Completed) return;
+            }
+
+            // Вызов события завершения спавна волны.
+            WaveSpawnCompleted?.Invoke();
+        }
+
         #endregion
 
 
@@ -322,13 +341,14 @@ namespace TowerDefense
         /// <summary>
         /// Спавнить следующую волну.
         /// </summary>
-        public void NextWave()
+        /// <param name="wave">Номер волны.</param>
+        public void NextWave(int wave)
         {
             // Мод спавнера - спавн.
             m_Mode = SpawnMode.Spawn;
 
             // Настроить спавнер.
-            TuneSpawner();
+            TuneSpawner(wave);
         }
 
         #endregion

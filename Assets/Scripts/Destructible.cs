@@ -135,9 +135,8 @@ namespace TowerDefense
             // Проверка на null и вызов события смерти.
             EventsOnDeath?.Invoke();
 
-            // Проверка на игрока.
+            // Добавить золото игроку.
             if (Player.Instance == null) Debug.Log("Player.Instance is null!");
-            // Отнимает жизни у игрока, если игрок есть.
             else Player.Instance.ChangeGold(m_GoldCost);
 
             // Уничтожение объекта

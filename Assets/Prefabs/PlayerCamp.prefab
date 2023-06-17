@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 1477053608}
   - component: {fileID: 1477053610}
   - component: {fileID: 5905348335671356527}
+  - component: {fileID: 6102253514646652013}
   m_Layer: 0
   m_Name: PlayerCamp
   m_TagString: Untagged
@@ -160,5 +161,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DoNotDestroyOnLoad: 0
-  m_CurrentLevel: 1
   m_NumberWaves: 30
+--- !u!114 &6102253514646652013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6189075042928652497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa089ff7077c004986161f2237f53ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DoNotDestroyOnLoad: 0
