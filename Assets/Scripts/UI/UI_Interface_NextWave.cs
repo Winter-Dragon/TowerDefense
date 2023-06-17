@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace TowerDefense
 {
@@ -22,9 +23,24 @@ namespace TowerDefense
         [SerializeField] private int m_NextWaveTime;
 
         /// <summary>
+        /// Панель с бонусным золотом.
+        /// </summary>
+        [SerializeField] private GameObject m_GoldPanel;
+
+        /// <summary>
+        /// Текст, отображающий получаемое золото при пропуске волны.
+        /// </summary>
+        [SerializeField] private TextMeshProUGUI m_GoldText;
+
+        /// <summary>
         /// Локальный таймер.
         /// </summary>
         private Timer m_Timer;
+
+        /// <summary>
+        /// Бонусное золото за запуск следующей волны.
+        /// </summary>
+        private int m_BonusGold;
 
         #endregion
 
@@ -35,9 +51,8 @@ namespace TowerDefense
         {
             // Проверка на LevelController.
             if (LevelController.Instance == null) { Debug.Log("LevelController.Instance == null!"); enabled = false; return; }
-
             // Не отображать, если уровень - последний.
-            if (LevelController.Instance.CurrentWave == LevelController.Instance.NumberWaves) { NextWave(); }
+            if (LevelController.Instance.CurrentWave == LevelController.Instance.NumberWaves) { m_BonusGold = 0; NextWave(); }
 
             // Полная заливка внутреннего круга.
             if (m_InnerSircleImage == null) Debug.Log("InnerSircleImage is null!");
@@ -45,6 +60,12 @@ namespace TowerDefense
 
             // Инициализация таймера.
             m_Timer = new Timer(m_NextWaveTime, false);
+
+            // Отобразить панель с золотом.
+            m_GoldPanel.SetActive(true);
+            // Обновление текста с бонусным золотом.
+            m_BonusGold = (int)m_Timer.GetCurrentTime();
+            m_GoldText.text = m_BonusGold.ToString();
         }
 
         private void Start()
@@ -56,12 +77,21 @@ namespace TowerDefense
 
         private void FixedUpdate()
         {
-            // Если текущая волна = 0 - выйти из метода.
-            if (LevelController.Instance.CurrentWave == 0) return;
+            // Если текущая волна = 0 - выйти из метода и убрать текст с золотом.
+            if (LevelController.Instance.CurrentWave == 0)
+            {
+                m_BonusGold = 0;
+                m_GoldPanel.SetActive(false);
+                return;
+            }
 
             // Обновление таймера.
             m_Timer.UpdateTimer();
-            
+
+            // Обновление текста с бонусным золотом.
+            m_BonusGold = (int)m_Timer.GetCurrentTime();
+            m_GoldText.text = m_BonusGold.ToString();
+
             // Если таймер завершён.
             if (m_Timer.IsFinished)
             {
@@ -84,6 +114,10 @@ namespace TowerDefense
         /// </summary>
         public void NextWave()
         {
+            // Добавить игроку золото.
+            if (Player.Instance != null) Player.Instance.ChangeGold(m_BonusGold);
+            else Debug.Log("Player.Instance == null!");
+
             // Выключить текущий объект.
             gameObject.SetActive(false);
             // Запустить новую волну.

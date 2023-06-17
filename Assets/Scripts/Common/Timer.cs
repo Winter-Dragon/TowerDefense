@@ -124,7 +124,7 @@ public class Timer
     }
 
     /// <summary>
-    /// Метод, возвращающий пройденное время.
+    /// Метод, возвращающий оставшееся время таймера.
     /// </summary>
     /// <returns></returns>
     public float GetCurrentTime()
