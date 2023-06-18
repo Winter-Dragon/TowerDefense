@@ -25,7 +25,7 @@ namespace TowerDefense
         /// <summary>
         /// Список врагов, вошедших в радиус башни.
         /// </summary>
-        private List<Enemy> m_Enemy = new();
+        private readonly List<Enemy> m_Enemy = new();
 
         /// <summary>
         /// Коллайдер башни.

@@ -26,7 +26,7 @@ namespace TowerDefense
         /// <summary>
         /// Ссылка на префаб объекта, появляющегося при попадании.
         /// </summary>
-        [SerializeField] private GameObject m_impactEffectPrefab;
+        [SerializeField] private ImpactEffect m_impactEffectPrefab;
 
         /// <summary>
         /// Радиус взрыва снаряда у артиллерии.
@@ -152,6 +152,13 @@ namespace TowerDefense
 
                         // Нанести урон объекту.
                         m_Target.ApplyDamage(damage);
+
+                        // Создание эффекта при попадании, если он есть
+                        if (m_impactEffectPrefab)
+                        {
+                            ImpactEffect impactEffect = Instantiate(m_impactEffectPrefab);
+                            impactEffect.transform.position = transform.position;
+                        }
 
                         // Если тип артиллерия - создать взрыв.
                         if (m_Type == TowerType.Artillery)
