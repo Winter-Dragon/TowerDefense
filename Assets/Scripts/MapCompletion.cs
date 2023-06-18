@@ -39,6 +39,20 @@ namespace TowerDefense
         /// </summary>
         private List <LevelScore> completionData = new();
 
+        /// <summary>
+        /// Кол-во полученных звёзд.
+        /// </summary>
+        private static int m_StarsCount;
+
+        #region Links
+
+        /// <summary>
+        /// Кол-во полученных звёзд.
+        /// </summary>
+        public static int StarsCount => m_StarsCount;
+
+        #endregion
+
         #endregion
 
 
@@ -51,6 +65,12 @@ namespace TowerDefense
 
             // Попытка загрузить данные.
             Saver<List<LevelScore>>.TryLoad(filename, ref completionData);
+        }
+
+        private void Start()
+        {
+            // Локально сохраняется общее кол-во полученных звёзд.
+            m_StarsCount = GetCurrentStarsCount();
         }
 
         #endregion
@@ -99,6 +119,9 @@ namespace TowerDefense
 
             // Сохранение данных.
             Saver<List<LevelScore>>.Save(filename, completionData);
+
+            // Локально сохраняется общее кол-во полученных звёзд.
+            m_StarsCount = GetCurrentStarsCount();
         }
 
         #endregion
@@ -168,6 +191,30 @@ namespace TowerDefense
 
             // Удалить сохранённый файл.
             Saver<List<LevelScore>>.Reset(filename);
+
+            // Обнуляется общее кол-во полученных звёзд.
+            m_StarsCount = 0;
+        }
+
+        /// <summary>
+        /// Метод, считающий кол-во полученных звёзд.
+        /// </summary>
+        /// <returns>Кол-во полученных звёзд.</returns>
+        public static int GetCurrentStarsCount()
+        {
+            // Создаётся переменная с кол-вом звёзд.
+            int stars = 0;
+
+            // Перебирается массив и считается общее кол-во звёзд.
+            if (Instance.completionData != null && Instance.completionData.Count > 0)
+            {
+                foreach (LevelScore level in Instance.completionData)
+                {
+                    stars += level.LevelStars;
+                }
+            }
+
+            return stars;
         }
 
         #endregion

@@ -18,7 +18,7 @@ namespace TowerDefense
         /// <summary>
         /// Текущее улучшение.
         /// </summary>
-        [SerializeField] private Upgrade m_CurrentUpgrade;
+        [SerializeField] private UpgradeList m_CurrentUpgrade;
 
         /// <summary>
         /// Картинка улучшения.
@@ -46,7 +46,7 @@ namespace TowerDefense
         /// <summary>
         /// Текущее улучшение.
         /// </summary>
-        public Upgrade CurrentUpgrade => m_CurrentUpgrade;
+        public UpgradeList CurrentUpgrade => m_CurrentUpgrade;
 
         /// <summary>
         /// Картинка улучшения.

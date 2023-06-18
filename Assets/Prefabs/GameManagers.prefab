@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3743625285567564394}
   - component: {fileID: 3743625285567564395}
   - component: {fileID: 2575703024844451312}
+  - component: {fileID: 3309134913344798100}
   m_Layer: 0
   m_Name: GameManagers
   m_TagString: Untagged
@@ -76,3 +77,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DoNotDestroyOnLoad: 1
+--- !u!114 &3309134913344798100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743625285567564392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c971bc9a3e7e644a39ea733a12535c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DoNotDestroyOnLoad: 1
+  m_MagicFirePrefab: {fileID: 4042805787659328903, guid: 7e73ea8913d614d4f86a66a7d89a7341, type: 3}

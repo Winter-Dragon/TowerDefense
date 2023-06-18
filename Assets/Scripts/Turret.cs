@@ -126,7 +126,21 @@ namespace TowerDefense
         /// </summary>
         private void InitTimers()
         {
-            if (m_TurretProperties != null) m_RefiteTimer = new Timer(m_TurretProperties.RateOfFire, false);
+            
+            if (m_TurretProperties != null)
+            {
+                // Если есть улучшение на ускорение скорости атаки артиллерии - активирует его.
+                if (m_TurretProperties.Type == TowerType.Artillery && Upgrades.CheckActiveUpgrade(UpgradeList.ArtilleryAttackSpeed))
+                {
+                    float newRateOfFire = m_TurretProperties.RateOfFire * 1.15f;
+                    m_RefiteTimer = new Timer(newRateOfFire, false);
+                }
+                // Если улучшения нет - скорость атаки стандартная.
+                else
+                {
+                    m_RefiteTimer = new Timer(m_TurretProperties.RateOfFire, false);
+                }
+            }
             if (m_AudioSource != null) m_AudioTimer = new Timer(m_AudioSource.clip.length, false);
         }
 

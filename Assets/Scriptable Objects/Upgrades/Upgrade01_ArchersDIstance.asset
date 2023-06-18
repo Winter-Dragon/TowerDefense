@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 530dffe983ad5ac4a9530d1f5a4c71d4, type: 3}
+  m_Name: Upgrade01_ArchersDIstance
+  m_EditorClassIdentifier: 
+  m_CurrentUpgrade: 1
+  m_UpgradeSprite: {fileID: 21300000, guid: 70fb9165a29b66c44b3cf34545b56a04, type: 3}
+  m_UpgradeCost: 1
+  m_UpgradeName: Improved detection system.
+  m_UpgradeInfo: Increases the attack range of Plasma Archers by 20%.

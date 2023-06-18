@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 530dffe983ad5ac4a9530d1f5a4c71d4, type: 3}
-  m_Name: Upgrade00_WizardManual
+  m_Name: Upgrade01_ArtilleryAttackSpeed
   m_EditorClassIdentifier: 
-  m_UpgradeSprite: {fileID: 21300000, guid: bbf5a55abcea62a4db154eb234045169, type: 3}
-  m_UpgradeCost: 0
-  m_UpgradeName: Congratulations!
-  m_UpgradeInfo: Now you are a witch. Your goal is to destroy all people and not
-    fall into the fire of the Inquisition.
+  m_CurrentUpgrade: 2
+  m_UpgradeSprite: {fileID: 21300000, guid: 4161dc1f8e3c5aa4297c92851cd965cf, type: 3}
+  m_UpgradeCost: 1
+  m_UpgradeName: Improved reload system.
+  m_UpgradeInfo: Increases the attack speed of magical cannon towers by 15%.

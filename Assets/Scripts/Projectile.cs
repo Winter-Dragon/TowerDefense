@@ -69,6 +69,11 @@ namespace TowerDefense
         /// </summary>
         private TowerType m_Type;
 
+        /// <summary>
+        /// Флаг активного улучшения магических эффектов.
+        /// </summary>
+        private bool m_MagicEffectsEnabled;
+
         #region Links
 
         /// <summary>
@@ -96,6 +101,32 @@ namespace TowerDefense
         {
             // Создание таймера времени жизни снаряда.
             m_Timer = new Timer(m_LifeTime, false);
+
+            // Если хранилище улучшений есть на сцене.
+            if (Upgrades.Instance)
+            {
+                // Если улучшение с магическими эффектами неактивно - выключает их.
+                if (Upgrades.CheckActiveUpgrade(UpgradeList.MagicEffects))
+                {
+                    m_MagicEffectsEnabled = true;
+                }
+            }
+            else Debug.Log("Upgrades is null!");
+
+            // Выключает систему частиц, если улучшения нет.
+            if (!m_MagicEffectsEnabled)
+            {
+                switch (m_Type)
+                {
+                    case TowerType.Artillery or TowerType.Mage:
+                        gameObject.GetComponent<ParticleSystem>().Stop();
+                        break;
+
+                    case TowerType.Archer:
+                        gameObject.GetComponent<TrailRenderer>().enabled = false;
+                        break;
+                }
+            }
         }
 
         private void FixedUpdate()
@@ -154,10 +185,18 @@ namespace TowerDefense
                         m_Target.ApplyDamage(damage);
 
                         // Создание эффекта при попадании, если он есть
-                        if (m_impactEffectPrefab)
+                        if (m_impactEffectPrefab && m_MagicEffectsEnabled)
                         {
                             ImpactEffect impactEffect = Instantiate(m_impactEffectPrefab);
                             impactEffect.transform.position = transform.position;
+                        }
+
+                        // Если есть улучшение на волшебный огонь для магов и цель ещё не мертва.
+                        if (m_Target && m_Type == TowerType.Mage && Upgrades.CheckActiveUpgrade(UpgradeList.MagicFire))
+                        {
+                            // Создаёт префаб огня на цели.
+                            ImpactEffect magicFire = Instantiate(Upgrades.Instance.MagicFirePrefab, m_Target.transform.root);
+                            magicFire.transform.position = m_Target.transform.position;
                         }
 
                         // Если тип артиллерия - создать взрыв.
