@@ -8,7 +8,7 @@ using UnityEditor;
 namespace TowerDefense
 {
     /// <summary>
-    /// Список поведений ИИ.
+    /// РЎРїРёСЃРѕРє РїРѕРІРµРґРµРЅРёР№ РР.
     /// </summary>
     public enum AIBehaviour
     {
@@ -17,7 +17,7 @@ namespace TowerDefense
     }
 
     /// <summary>
-    /// Основной класс врага.
+    /// РћСЃРЅРѕРІРЅРѕР№ РєР»Р°СЃСЃ РІСЂР°РіР°.
     /// </summary>
     [RequireComponent(typeof(CircleArea), typeof(Rigidbody2D))]
     public class Enemy : Destructible
@@ -26,84 +26,84 @@ namespace TowerDefense
         #region Properties and Components
 
         /// <summary>
-        /// Выбор поведения объекта через Inspector.
+        /// Р’С‹Р±РѕСЂ РїРѕРІРµРґРµРЅРёСЏ РѕР±СЉРµРєС‚Р° С‡РµСЂРµР· Inspector.
         /// </summary>
         [SerializeField] private AIBehaviour m_AIBehaviour;
 
         /// <summary>
-        /// Скорость передвижения объекта.
+        /// РЎРєРѕСЂРѕСЃС‚СЊ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ РѕР±СЉРµРєС‚Р°.
         /// </summary>
         [SerializeField] private float m_Speed;
 
         /// <summary>
-        /// Маршрут передвижения ИИ.
+        /// РњР°СЂС€СЂСѓС‚ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ РР.
         /// </summary>
         [SerializeField] private List<CircleArea> m_Route;
 
         /// <summary>
-        /// Радиус поиска цели.
+        /// Р Р°РґРёСѓСЃ РїРѕРёСЃРєР° С†РµР»Рё.
         /// </summary>
         [SerializeField] private float m_FindTargetRadius;
 
         /// <summary>
-        /// Скорость атаки объекта.
+        /// РЎРєРѕСЂРѕСЃС‚СЊ Р°С‚Р°РєРё РѕР±СЉРµРєС‚Р°.
         /// </summary>
         [SerializeField] private float m_AttackDelay;
 
         /// <summary>
-        /// Ссылка на спрайт рендерер объекта.
+        /// РЎСЃС‹Р»РєР° РЅР° СЃРїСЂР°Р№С‚ СЂРµРЅРґРµСЂРµСЂ РѕР±СЉРµРєС‚Р°.
         /// </summary>
         [SerializeField] private SpriteRenderer m_Sprite;
 
         /// <summary>
-        /// Ссылка на аниматор спрайтов на объекте.
+        /// РЎСЃС‹Р»РєР° РЅР° Р°РЅРёРјР°С‚РѕСЂ СЃРїСЂР°Р№С‚РѕРІ РЅР° РѕР±СЉРµРєС‚Рµ.
         /// </summary>
         [SerializeField] private AnimateSpriteFrames m_SpriteAnimator;
 
         /// <summary>
-        /// Ссылка на коллайдер объекта.
+        /// РЎСЃС‹Р»РєР° РЅР° РєРѕР»Р»Р°Р№РґРµСЂ РѕР±СЉРµРєС‚Р°.
         /// </summary>
         [SerializeField] private BoxCollider2D m_BoxCollider;
 
         /// <summary>
-        /// Ригидбади объекта.
+        /// Р РёРіРёРґР±Р°РґРё РѕР±СЉРµРєС‚Р°.
         /// </summary>
         private Rigidbody2D m_Rigidbody;
 
         /// <summary>
-        /// Вектор целевой позиции движения объекта.
+        /// Р’РµРєС‚РѕСЂ С†РµР»РµРІРѕР№ РїРѕР·РёС†РёРё РґРІРёР¶РµРЅРёСЏ РѕР±СЉРµРєС‚Р°.
         /// </summary>
         private Vector3 m_MovePosition;
 
         /// <summary>
-        /// Переменная, отображающая текущий индекс позиции передвижения объекта.
+        /// РџРµСЂРµРјРµРЅРЅР°СЏ, РѕС‚РѕР±СЂР°Р¶Р°СЋС‰Р°СЏ С‚РµРєСѓС‰РёР№ РёРЅРґРµРєСЃ РїРѕР·РёС†РёРё РїРµСЂРµРґРІРёР¶РµРЅРёСЏ РѕР±СЉРµРєС‚Р°.
         /// </summary>
         private int m_CurrentPositionIndex;
 
         /// <summary>
-        /// Флаг, обозначающий выбрана ли точка для движения.
+        /// Р¤Р»Р°Рі, РѕР±РѕР·РЅР°С‡Р°СЋС‰РёР№ РІС‹Р±СЂР°РЅР° Р»Рё С‚РѕС‡РєР° РґР»СЏ РґРІРёР¶РµРЅРёСЏ.
         /// </summary>
         private bool m_NewMovePositionSelected;
 
         /// <summary>
-        /// Destructible цели для атаки.
+        /// Destructible С†РµР»Рё РґР»СЏ Р°С‚Р°РєРё.
         /// </summary>
         private Destructible m_SelectedTarget;
 
         /// <summary>
-        /// Цена юнита в жизнях.
+        /// Р¦РµРЅР° СЋРЅРёС‚Р° РІ Р¶РёР·РЅСЏС….
         /// </summary>
         private int m_LivesCost;
 
         /// <summary>
-        /// Статичный эвент уничтожения врага.
+        /// РЎС‚Р°С‚РёС‡РЅС‹Р№ СЌРІРµРЅС‚ СѓРЅРёС‡С‚РѕР¶РµРЅРёСЏ РІСЂР°РіР°.
         /// </summary>
         public static event EmptyDelegate EnemyDestroy;
 
         #region Timers
 
         /// <summary>
-        /// Таймер атаки.
+        /// РўР°Р№РјРµСЂ Р°С‚Р°РєРё.
         /// </summary>
         private Timer m_AttackTimer;
 
@@ -123,16 +123,16 @@ namespace TowerDefense
 
 #if UNITY_EDITOR
         /// <summary>
-        /// Метод, работающий в инспекторе после изменения значений.
+        /// РњРµС‚РѕРґ, СЂР°Р±РѕС‚Р°СЋС‰РёР№ РІ РёРЅСЃРїРµРєС‚РѕСЂРµ РїРѕСЃР»Рµ РёР·РјРµРЅРµРЅРёСЏ Р·РЅР°С‡РµРЅРёР№.
         /// </summary>
         private void OnValidate()
         {
-            // Автоматически задаёт радиус CircleArea от текущего радиуса.
+            // РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРё Р·Р°РґР°С‘С‚ СЂР°РґРёСѓСЃ CircleArea РѕС‚ С‚РµРєСѓС‰РµРіРѕ СЂР°РґРёСѓСЃР°.
             GetComponent<CircleArea>().ChangeRadius(m_FindTargetRadius);
         }
 
         /// <summary>
-        /// Гизмос, рисующий линию передвижения ИИ.
+        /// Р“РёР·РјРѕСЃ, СЂРёСЃСѓСЋС‰РёР№ Р»РёРЅРёСЋ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ РР.
         /// </summary>
         private void OnDrawGizmosSelected()
         {
@@ -143,40 +143,40 @@ namespace TowerDefense
 
         protected override void Start()
         {
-            // Использовать свойства переопределённого метода.
+            // РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃРІРѕР№СЃС‚РІР° РїРµСЂРµРѕРїСЂРµРґРµР»С‘РЅРЅРѕРіРѕ РјРµС‚РѕРґР°.
             base.Start();
 
-            // Инициализация таймеров.
+            // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С‚Р°Р№РјРµСЂРѕРІ.
             InitTimers();
 
-            // Взять ссылку на Rigidbody с объекта.
+            // Р’Р·СЏС‚СЊ СЃСЃС‹Р»РєСѓ РЅР° Rigidbody СЃ РѕР±СЉРµРєС‚Р°.
             m_Rigidbody = GetComponent<Rigidbody2D>();
 
-            // Подписаться на событие паузы.
+            // РџРѕРґРїРёСЃР°С‚СЊСЃСЏ РЅР° СЃРѕР±С‹С‚РёРµ РїР°СѓР·С‹.
             PauseController.OnPaused += Paused;
         }
 
         /// <summary>
-        /// Действия при уничтожении объекта.
+        /// Р”РµР№СЃС‚РІРёСЏ РїСЂРё СѓРЅРёС‡С‚РѕР¶РµРЅРёРё РѕР±СЉРµРєС‚Р°.
         /// </summary>
         protected override void OnDestroy()
         {
-            // Выполнять базовый метод из Destructuble.
+            // Р’С‹РїРѕР»РЅСЏС‚СЊ Р±Р°Р·РѕРІС‹Р№ РјРµС‚РѕРґ РёР· Destructuble.
             base.OnDestroy();
 
-            // Вызов события уничтожения врага.
+            // Р’С‹Р·РѕРІ СЃРѕР±С‹С‚РёСЏ СѓРЅРёС‡С‚РѕР¶РµРЅРёСЏ РІСЂР°РіР°.
             EnemyDestroy?.Invoke();
 
-            // Отписаться от события паузы.
+            // РћС‚РїРёСЃР°С‚СЊСЃСЏ РѕС‚ СЃРѕР±С‹С‚РёСЏ РїР°СѓР·С‹.
             PauseController.OnPaused -= Paused;
         }
 
         private void FixedUpdate()
         {
-            // Обновить все таймеры.
+            // РћР±РЅРѕРІРёС‚СЊ РІСЃРµ С‚Р°Р№РјРµСЂС‹.
             UpdateTimers();
 
-            // Обновить поведение ИИ.
+            // РћР±РЅРѕРІРёС‚СЊ РїРѕРІРµРґРµРЅРёРµ РР.
             UpdateAI();
         }
 
@@ -188,7 +188,7 @@ namespace TowerDefense
         #region Timers
 
         /// <summary>
-        /// Метод, инициализирующий все таймеры.
+        /// РњРµС‚РѕРґ, РёРЅРёС†РёР°Р»РёР·РёСЂСѓСЋС‰РёР№ РІСЃРµ С‚Р°Р№РјРµСЂС‹.
         /// </summary>
         private void InitTimers()
         {
@@ -196,7 +196,7 @@ namespace TowerDefense
         }
 
         /// <summary>
-        /// Метод, обновляющий все таймеры.
+        /// РњРµС‚РѕРґ, РѕР±РЅРѕРІР»СЏСЋС‰РёР№ РІСЃРµ С‚Р°Р№РјРµСЂС‹.
         /// </summary>
         private void UpdateTimers()
         {
@@ -206,110 +206,110 @@ namespace TowerDefense
         #endregion
 
         /// <summary>
-        /// Метод, обновляющий действия ИИ.
+        /// РњРµС‚РѕРґ, РѕР±РЅРѕРІР»СЏСЋС‰РёР№ РґРµР№СЃС‚РІРёСЏ РР.
         /// </summary>
         private void UpdateAI()
         {
-            // Действия ИИ.
+            // Р”РµР№СЃС‚РІРёСЏ РР.
             switch (m_AIBehaviour)
             {
-                // действие не выбрано.
+                // РґРµР№СЃС‚РІРёРµ РЅРµ РІС‹Р±СЂР°РЅРѕ.
                 case AIBehaviour.Null:
-                    // Найти цель для движенмя.
+                    // РќР°Р№С‚Рё С†РµР»СЊ РґР»СЏ РґРІРёР¶РµРЅРјСЏ.
                     ActionFindNewMovePosition();
                     break;
 
-                // Действие движения.
+                // Р”РµР№СЃС‚РІРёРµ РґРІРёР¶РµРЅРёСЏ.
                 case AIBehaviour.Walk:
-                    // Найти цель для движенмя.
+                    // РќР°Р№С‚Рё С†РµР»СЊ РґР»СЏ РґРІРёР¶РµРЅРјСЏ.
                     ActionFindNewMovePosition();
-                    // Двигаться к цели.
+                    // Р”РІРёРіР°С‚СЊСЃСЏ Рє С†РµР»Рё.
                     ActionMove();
                     break;
             }
         }
 
         /// <summary>
-        /// Метод, ищущий следующую цель для передвижения.
+        /// РњРµС‚РѕРґ, РёС‰СѓС‰РёР№ СЃР»РµРґСѓСЋС‰СѓСЋ С†РµР»СЊ РґР»СЏ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ.
         /// </summary>
         private void ActionFindNewMovePosition()
         {
-            // Действия ИИ.
+            // Р”РµР№СЃС‚РІРёСЏ РР.
             switch (m_AIBehaviour)
             {
-                // Дейвствие Null.
+                // Р”РµР№РІСЃС‚РІРёРµ Null.
                 case AIBehaviour.Null:
 
-                    // Если есть маршрут - меняет действие на движение.
+                    // Р•СЃР»Рё РµСЃС‚СЊ РјР°СЂС€СЂСѓС‚ - РјРµРЅСЏРµС‚ РґРµР№СЃС‚РІРёРµ РЅР° РґРІРёР¶РµРЅРёРµ.
                     if (m_Route != null) m_AIBehaviour = AIBehaviour.Walk;
                     break;
 
-                // Действие Patrul
+                // Р”РµР№СЃС‚РІРёРµ Patrul
                 case AIBehaviour.Walk:
-                    // Если есть маршрут передвижения.
+                    // Р•СЃР»Рё РµСЃС‚СЊ РјР°СЂС€СЂСѓС‚ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ.
                     if (m_Route != null && m_Route.Count > 0)
                     {
-                        // Переменная, отображающая, находится ли объект в зоне следующей точки движения.
+                        // РџРµСЂРµРјРµРЅРЅР°СЏ, РѕС‚РѕР±СЂР°Р¶Р°СЋС‰Р°СЏ, РЅР°С…РѕРґРёС‚СЃСЏ Р»Рё РѕР±СЉРµРєС‚ РІ Р·РѕРЅРµ СЃР»РµРґСѓСЋС‰РµР№ С‚РѕС‡РєРё РґРІРёР¶РµРЅРёСЏ.
                         bool isInsidePatrolZone = (m_Route[m_CurrentPositionIndex].transform.position - transform.position).sqrMagnitude < m_Route[m_CurrentPositionIndex].Radius * m_Route[m_CurrentPositionIndex].Radius;
 
-                        // Если позиция ИИ настигла следующую зону движения.
+                        // Р•СЃР»Рё РїРѕР·РёС†РёСЏ РР РЅР°СЃС‚РёРіР»Р° СЃР»РµРґСѓСЋС‰СѓСЋ Р·РѕРЅСѓ РґРІРёР¶РµРЅРёСЏ.
                         if (isInsidePatrolZone)
                         {
-                            // Индекс позиции ++.
+                            // РРЅРґРµРєСЃ РїРѕР·РёС†РёРё ++.
                             m_CurrentPositionIndex++;
 
-                            // Если индекс больше, чем кол-во точек передвижения.
+                            // Р•СЃР»Рё РёРЅРґРµРєСЃ Р±РѕР»СЊС€Рµ, С‡РµРј РєРѕР»-РІРѕ С‚РѕС‡РµРє РїРµСЂРµРґРІРёР¶РµРЅРёСЏ.
                             if (m_CurrentPositionIndex >= m_Route.Count)
                             {
-                                // Проверка на игрока.
+                                // РџСЂРѕРІРµСЂРєР° РЅР° РёРіСЂРѕРєР°.
                                 if (Player.Instance == null) Debug.Log("Player.Instance is null!");
-                                // Отнимает жизни у игрока, если игрок есть.
+                                // РћС‚РЅРёРјР°РµС‚ Р¶РёР·РЅРё Сѓ РёРіСЂРѕРєР°, РµСЃР»Рё РёРіСЂРѕРє РµСЃС‚СЊ.
                                 else Player.Instance.ChangeLives(-m_LivesCost);
 
-                                // Уничтожить объект.
+                                // РЈРЅРёС‡С‚РѕР¶РёС‚СЊ РѕР±СЉРµРєС‚.
                                 Destroy(gameObject);
                                 return;
                             }
 
-                            // Задаётся вектор следующей позиции в случайной позиции новой точки передвижения.
+                            // Р—Р°РґР°С‘С‚СЃСЏ РІРµРєС‚РѕСЂ СЃР»РµРґСѓСЋС‰РµР№ РїРѕР·РёС†РёРё РІ СЃР»СѓС‡Р°Р№РЅРѕР№ РїРѕР·РёС†РёРё РЅРѕРІРѕР№ С‚РѕС‡РєРё РїРµСЂРµРґРІРёР¶РµРЅРёСЏ.
                             Vector2 newPoint = m_Route[m_CurrentPositionIndex].GetRandomInsideZone();
 
-                            // Задаётся новая позиция движения к точке.
+                            // Р—Р°РґР°С‘С‚СЃСЏ РЅРѕРІР°СЏ РїРѕР·РёС†РёСЏ РґРІРёР¶РµРЅРёСЏ Рє С‚РѕС‡РєРµ.
                             m_MovePosition = newPoint;
                         }
-                        // Если объект не в зоне передвижения.
+                        // Р•СЃР»Рё РѕР±СЉРµРєС‚ РЅРµ РІ Р·РѕРЅРµ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ.
                         else
                         {
-                            // Проверка, выбрана ли уже точка для движения.
+                            // РџСЂРѕРІРµСЂРєР°, РІС‹Р±СЂР°РЅР° Р»Рё СѓР¶Рµ С‚РѕС‡РєР° РґР»СЏ РґРІРёР¶РµРЅРёСЏ.
                             if (m_NewMovePositionSelected) return;
 
-                            // Задаётся вектор следующей позиции в случайной позиции текущей точки передвижения.
+                            // Р—Р°РґР°С‘С‚СЃСЏ РІРµРєС‚РѕСЂ СЃР»РµРґСѓСЋС‰РµР№ РїРѕР·РёС†РёРё РІ СЃР»СѓС‡Р°Р№РЅРѕР№ РїРѕР·РёС†РёРё С‚РµРєСѓС‰РµР№ С‚РѕС‡РєРё РїРµСЂРµРґРІРёР¶РµРЅРёСЏ.
                             Vector2 newPoint = m_Route[m_CurrentPositionIndex].GetRandomInsideZone();
 
-                            // Задаётся новая позиция движения к точке.
+                            // Р—Р°РґР°С‘С‚СЃСЏ РЅРѕРІР°СЏ РїРѕР·РёС†РёСЏ РґРІРёР¶РµРЅРёСЏ Рє С‚РѕС‡РєРµ.
                             m_MovePosition = newPoint;
 
-                            // Флаг выбора точки для движения.
+                            // Р¤Р»Р°Рі РІС‹Р±РѕСЂР° С‚РѕС‡РєРё РґР»СЏ РґРІРёР¶РµРЅРёСЏ.
                             m_NewMovePositionSelected = true;
                         }
 
-                        // Если позиции для движения нет.
+                        // Р•СЃР»Рё РїРѕР·РёС†РёРё РґР»СЏ РґРІРёР¶РµРЅРёСЏ РЅРµС‚.
                         if (m_MovePosition == null)
                         {
-                            // Задаётся вектор следующей позиции в случайной позиции новой точки.
+                            // Р—Р°РґР°С‘С‚СЃСЏ РІРµРєС‚РѕСЂ СЃР»РµРґСѓСЋС‰РµР№ РїРѕР·РёС†РёРё РІ СЃР»СѓС‡Р°Р№РЅРѕР№ РїРѕР·РёС†РёРё РЅРѕРІРѕР№ С‚РѕС‡РєРё.
                             Vector2 newPoint = m_Route[m_CurrentPositionIndex].GetRandomInsideZone();
 
-                            // Задаётся новая позиция движения к точке.
+                            // Р—Р°РґР°С‘С‚СЃСЏ РЅРѕРІР°СЏ РїРѕР·РёС†РёСЏ РґРІРёР¶РµРЅРёСЏ Рє С‚РѕС‡РєРµ.
                             m_MovePosition = newPoint;
                         }
                     }
-                    // Если нет маршрута движения.
+                    // Р•СЃР»Рё РЅРµС‚ РјР°СЂС€СЂСѓС‚Р° РґРІРёР¶РµРЅРёСЏ.
                     else
                     {
-                        // Вывести сообщение об изменении состояния объекта.
+                        // Р’С‹РІРµСЃС‚Рё СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РёР·РјРµРЅРµРЅРёРё СЃРѕСЃС‚РѕСЏРЅРёСЏ РѕР±СЉРµРєС‚Р°.
                         Debug.Log("Select Route! Object stay sleep.");
 
-                        // Перевод режима ИИ в null.
+                        // РџРµСЂРµРІРѕРґ СЂРµР¶РёРјР° РР РІ null.
                         m_AIBehaviour = AIBehaviour.Null;
                     }
                     break;
@@ -317,22 +317,22 @@ namespace TowerDefense
         }
 
         /// <summary>
-        /// Метод передвижения врага.
+        /// РњРµС‚РѕРґ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ РІСЂР°РіР°.
         /// </summary>
         private void ActionMove()
         {
-            // Объект интерполируется через физику к указанной точке с указанной скоростью.
+            // РћР±СЉРµРєС‚ РёРЅС‚РµСЂРїРѕР»РёСЂСѓРµС‚СЃСЏ С‡РµСЂРµР· С„РёР·РёРєСѓ Рє СѓРєР°Р·Р°РЅРЅРѕР№ С‚РѕС‡РєРµ СЃ СѓРєР°Р·Р°РЅРЅРѕР№ СЃРєРѕСЂРѕСЃС‚СЊСЋ.
             m_Rigidbody.MovePosition(Vector3.MoveTowards(transform.position, m_MovePosition, m_Speed * Time.fixedDeltaTime));
 
-            // Вектор движения объекта.
+            // Р’РµРєС‚РѕСЂ РґРІРёР¶РµРЅРёСЏ РѕР±СЉРµРєС‚Р°.
             Vector2 distance = m_MovePosition - transform.position;
 
-            // Если вектор X направлен вправо - не разворачивать спрайт.
+            // Р•СЃР»Рё РІРµРєС‚РѕСЂ X РЅР°РїСЂР°РІР»РµРЅ РІРїСЂР°РІРѕ - РЅРµ СЂР°Р·РІРѕСЂР°С‡РёРІР°С‚СЊ СЃРїСЂР°Р№С‚.
             if (distance.x > 0.01)
             {
                 m_Sprite.flipX = false;
             }
-            // Если вектор X направлен влево - развернуть спрайт.
+            // Р•СЃР»Рё РІРµРєС‚РѕСЂ X РЅР°РїСЂР°РІР»РµРЅ РІР»РµРІРѕ - СЂР°Р·РІРµСЂРЅСѓС‚СЊ СЃРїСЂР°Р№С‚.
             if (distance.x < 0.01)
             {
                 m_Sprite.flipX = true;
@@ -340,12 +340,12 @@ namespace TowerDefense
         }
 
         /// <summary>
-        /// Метод постановки на паузу.
+        /// РњРµС‚РѕРґ РїРѕСЃС‚Р°РЅРѕРІРєРё РЅР° РїР°СѓР·Сѓ.
         /// </summary>
-        /// <param name="pause">Пауза?</param>
+        /// <param name="pause">РџР°СѓР·Р°?</param>
         private void Paused(bool pause)
         {
-            // Отключает скрипт в зависимости от состояния паузы.
+            // РћС‚РєР»СЋС‡Р°РµС‚ СЃРєСЂРёРїС‚ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїР°СѓР·С‹.
             enabled = !pause;
         }
 
@@ -355,33 +355,33 @@ namespace TowerDefense
         #region Public API
 
         /// <summary>
-        /// Метод, позволяющий задать объекту маршрут движения.
+        /// РњРµС‚РѕРґ, РїРѕР·РІРѕР»СЏСЋС‰РёР№ Р·Р°РґР°С‚СЊ РѕР±СЉРµРєС‚Сѓ РјР°СЂС€СЂСѓС‚ РґРІРёР¶РµРЅРёСЏ.
         /// </summary>
-        /// <param name="route">Массив CircleArea.</param>
+        /// <param name="route">РњР°СЃСЃРёРІ CircleArea.</param>
         public void SetRoute(List<CircleArea> route)
         {
             m_Route = route;
         }
 
         /// <summary>
-        /// Метод, задающий объекту характеристики при спавне через спавнер.
+        /// РњРµС‚РѕРґ, Р·Р°РґР°СЋС‰РёР№ РѕР±СЉРµРєС‚Сѓ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё РїСЂРё СЃРїР°РІРЅРµ С‡РµСЂРµР· СЃРїР°РІРЅРµСЂ.
         /// </summary>
-        /// <param name="characteristics">Характеристики объекта SO_Enemy.</param>
-        public void SetEnemyСharacteristics(SO_Enemy characteristics)
+        /// <param name="characteristics">РҐР°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё РѕР±СЉРµРєС‚Р° SO_Enemy.</param>
+        public void SetEnemyРЎharacteristics(SO_Enemy characteristics)
         {
-            // Задаётся скорость передвижения.
+            // Р—Р°РґР°С‘С‚СЃСЏ СЃРєРѕСЂРѕСЃС‚СЊ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ.
             m_Speed = characteristics.MoveSpeed;
-            // Задаётся стоимость в жизнях.
+            // Р—Р°РґР°С‘С‚СЃСЏ СЃС‚РѕРёРјРѕСЃС‚СЊ РІ Р¶РёР·РЅСЏС….
             m_LivesCost = characteristics.LivesCost;
-            // Установка анимации бега в аниматор.
+            // РЈСЃС‚Р°РЅРѕРІРєР° Р°РЅРёРјР°С†РёРё Р±РµРіР° РІ Р°РЅРёРјР°С‚РѕСЂ.
             m_SpriteAnimator.SetNewAnimationFrames(characteristics.WalkAnimations);
-            // Задаётся скейлинг спрайта.
+            // Р—Р°РґР°С‘С‚СЃСЏ СЃРєРµР№Р»РёРЅРі СЃРїСЂР°Р№С‚Р°.
             m_Sprite.size = characteristics.SpriteScale;
-            // Установка нового размера коллайдера.
+            // РЈСЃС‚Р°РЅРѕРІРєР° РЅРѕРІРѕРіРѕ СЂР°Р·РјРµСЂР° РєРѕР»Р»Р°Р№РґРµСЂР°.
             m_BoxCollider.size = characteristics.ColliderSize;
 
-            // Передача характеристик в Destructible.
-            SetDestructibleСharacteristics(characteristics);
+            // РџРµСЂРµРґР°С‡Р° С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРє РІ Destructible.
+            SetDestructibleРЎharacteristics(characteristics);
         }
 
         #endregion
