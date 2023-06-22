@@ -3,7 +3,7 @@ using UnityEngine;
 namespace TowerDefense
 {
     /// <summary>
-    /// Класс постройки башни.
+    /// РљР»Р°СЃСЃ РїРѕСЃС‚СЂРѕР№РєРё Р±Р°С€РЅРё.
     /// </summary>
     public class TowerBuyController : Singleton<TowerBuyController>
     {
@@ -11,27 +11,27 @@ namespace TowerDefense
         #region Public API
 
         /// <summary>
-        /// Попробовать построить башню.
+        /// РџРѕРїСЂРѕР±РѕРІР°С‚СЊ РїРѕСЃС‚СЂРѕРёС‚СЊ Р±Р°С€РЅСЋ.
         /// </summary>
-        /// <param name="constructionSite">Место постройки.</param>
-        /// <param name="towerAsset">Характеристики башни.</param>
-        /// <param name="goldCost">Стоимость постройки башни.</param>
+        /// <param name="constructionSite">РњРµСЃС‚Рѕ РїРѕСЃС‚СЂРѕР№РєРё.</param>
+        /// <param name="towerAsset">РҐР°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё Р±Р°С€РЅРё.</param>
+        /// <param name="goldCost">РЎС‚РѕРёРјРѕСЃС‚СЊ РїРѕСЃС‚СЂРѕР№РєРё Р±Р°С€РЅРё.</param>
         public void TryBuildTower(ConstructionSite constructionSite, SO_TowerProperties towerAsset, int goldCost)
         {
-            // Проверка на игрока.
+            // РџСЂРѕРІРµСЂРєР° РЅР° РёРіСЂРѕРєР°.
             if (Player.Instance == null) { Debug.Log("Player.Instance == null!"); return; }
-            // Проверка на наличие золота.
+            // РџСЂРѕРІРµСЂРєР° РЅР° РЅР°Р»РёС‡РёРµ Р·РѕР»РѕС‚Р°.
             if (Player.Instance.CurrentGold < goldCost) return;
 
-            // Построить башню.
+            // РџРѕСЃС‚СЂРѕРёС‚СЊ Р±Р°С€РЅСЋ.
             constructionSite.BuildTower(towerAsset.TurretPrefab);
 
-            // Убрать золото у игрока.
+            // РЈР±СЂР°С‚СЊ Р·РѕР»РѕС‚Рѕ Сѓ РёРіСЂРѕРєР°.
             Player.Instance.ChangeGold(-goldCost);
 
-            // Проверка на наличие интерфейса покупки башен.
+            // РџСЂРѕРІРµСЂРєР° РЅР° РЅР°Р»РёС‡РёРµ РёРЅС‚РµСЂС„РµР№СЃР° РїРѕРєСѓРїРєРё Р±Р°С€РµРЅ.
             if (UI_Interface_BuyTower.Instance == null) { Debug.Log("UI_Interface_BuyTower.Instance == null!"); return; }
-            // Если интерфейс есть - скрыть его.
+            // Р•СЃР»Рё РёРЅС‚РµСЂС„РµР№СЃ РµСЃС‚СЊ - СЃРєСЂС‹С‚СЊ РµРіРѕ.
             else UI_Interface_BuyTower.Instance.SetStateInterface(false);
         }
 
