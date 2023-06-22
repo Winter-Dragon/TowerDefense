@@ -37,9 +37,11 @@ namespace TowerDefense
         /// </summary>
         public void StartNewGame()
         {
-            // Удаление сохранённого файла.
+            // Удаление сохранённых файлов.
             if (MapCompletion.Instance != null) MapCompletion.ResetSavedData();
             else Debug.Log("MapCompletion.Instance == null!");
+            if (Upgrades.Instance != null) Upgrades.Instance.ResetSavedUpgrades();
+            else Debug.Log("Upgrades.Instance == null!");
 
             // Запуск карты уровней.
             if (LevelSequenceController.Instance != null) LevelSequenceController.Instance.LoadLevelMapScene();

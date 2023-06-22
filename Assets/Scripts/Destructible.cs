@@ -47,6 +47,11 @@ namespace TowerDefense
         private int m_Armor;
 
         /// <summary>
+        /// Тип брони объекта.
+        /// </summary>
+        private ArmorType m_TypeArmor;
+
+        /// <summary>
         /// Статичный список всех Destructible элементов.
         /// </summary>
         private static HashSet<Destructible> m_AllDestructibles;
@@ -77,6 +82,11 @@ namespace TowerDefense
         /// Броня объекта.
         /// </summary>
         public int Armor => m_Armor;
+
+        /// <summary>
+        /// Тип брони объекта.
+        /// </summary>
+        public ArmorType TypeArmor => m_TypeArmor;
 
         /// <summary>
         /// Номер команды объекта.
@@ -125,7 +135,7 @@ namespace TowerDefense
         #endregion
 
 
-        #region Protected API
+        #region Private API
 
         /// <summary>
         /// Переопределяемое событие уничножение объекта, когда HP < 0.
@@ -154,6 +164,7 @@ namespace TowerDefense
 
             // Задаётся броня.
             m_Armor = characteristics.Armor;
+            m_TypeArmor = characteristics.TypeArmor;
 
             // Задаётся стоимость в золоте.
             m_GoldCost = characteristics.GoldCost;

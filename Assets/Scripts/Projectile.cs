@@ -177,9 +177,8 @@ namespace TowerDefense
                     // Если цель ещё не уничтожена.
                     if (m_Target != null)
                     {
-                        // Вычисляется рандомное значение из вектора урона, из него вычитается броня цели. Минимальное значение урона - 1.
-                        int damage = (int)Random.Range(m_Damage.x, m_Damage.y) - m_Target.Armor;
-                        if (damage < 1) damage = 1;
+                        // Вычисляется наносимый урон.
+                        int damage = CalculateDamage(m_Damage, m_Target.Armor, m_Target.TypeArmor, m_Type);
 
                         // Нанести урон объекту.
                         m_Target.ApplyDamage(damage);
@@ -240,13 +239,47 @@ namespace TowerDefense
                 // Если Enemy нет || Enemy - предыдущая цель, выйти из выполнения итерации.
                 if (enemy == null || enemy == m_Target) continue;
 
-                // Вычисляется рандомное значение из вектора урона, из него вычитается броня цели. Минимальное значение урона - 1.
-                int damage = (int)Random.Range(m_Damage.x, m_Damage.y) - m_Target.Armor;
-                if (damage < 1) damage = 1;
+                // Вычисляется наносимый урон.
+                int damage = CalculateDamage(m_Damage, m_Target.Armor, m_Target.TypeArmor, m_Type);
 
                 // Нанести урон объекту.
                 enemy.ApplyDamage(damage);
             }
+        }
+
+        /// <summary>
+        /// Считает кол-во урона, которые необходимо нанести.
+        /// </summary>
+        /// <param name="damage">Начальный вектор урона.</param>
+        /// <param name="armor">Кол-во брони цели.</param>
+        /// <param name="armorType">Тип брони цели.</param>
+        /// <param name="towerType">Тип урона башни.</param>
+        /// <returns></returns>
+        private int CalculateDamage(Vector2 damage, int armor, ArmorType armorType, TowerType towerType)
+        {
+            // Считается случайное значение урона из промежутка.
+            int calculatedDamage = (int) Random.Range(damage.x, damage.y);
+            // Считается урон в зависимости от брони.
+            switch (armorType)
+            {
+                case ArmorType.Physics:
+                    if (towerType == TowerType.Archer || towerType == TowerType.Artillery || towerType == TowerType.Infantry)
+                    {
+                        calculatedDamage -= armor;
+                    }
+                    break;
+
+                case ArmorType.Magic:
+                    if (towerType == TowerType.Mage)
+                    {
+                        calculatedDamage -= armor;
+                    }
+                    break;
+            }
+            // Минимальный урон - 1.
+            if (calculatedDamage < 1) calculatedDamage = 1;
+
+            return calculatedDamage;
         }
 
         #endregion

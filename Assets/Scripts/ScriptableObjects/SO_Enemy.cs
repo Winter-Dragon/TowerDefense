@@ -3,6 +3,25 @@ using UnityEngine;
 namespace TowerDefense
 {
     /// <summary>
+    /// Тип брони у врагов.
+    /// </summary>
+    public enum ArmorType
+    {
+        /// <summary>
+        /// Нет брони.
+        /// </summary>
+        None,
+        /// <summary>
+        /// Защита от физических атак.
+        /// </summary>
+        Physics,
+        /// <summary>
+        /// Защита от магических атак.
+        /// </summary>
+        Magic
+    }
+
+    /// <summary>
     /// Класс, настраивающий внешний вид и характеристики врагов.
     /// </summary>
     [CreateAssetMenu(fileName = "EnemyProperties", menuName = "ScriptableObjects/CreateNewEnemyProperties")]
@@ -33,6 +52,11 @@ namespace TowerDefense
         /// Кол-во урона, которое блокируется при атаке башни.
         /// </summary>
         [SerializeField] private int m_Armor;
+
+        /// <summary>
+        /// Тип брони.
+        /// </summary>
+        [SerializeField] private ArmorType m_TypeArmor;
 
         /// <summary>
         /// Скорость передвижения.
@@ -84,6 +108,11 @@ namespace TowerDefense
         /// Значение урона, которое блокируется при получении урона.
         /// </summary>
         public int Armor => m_Armor;
+
+        /// <summary>
+        /// Тип брони.
+        /// </summary>
+        public ArmorType TypeArmor => m_TypeArmor;
 
         /// <summary>
         /// Скорость передвижения.
