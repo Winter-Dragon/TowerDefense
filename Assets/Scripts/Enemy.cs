@@ -371,16 +371,12 @@ namespace TowerDefense
         {
             // Задаётся скорость передвижения.
             m_Speed = characteristics.MoveSpeed;
-
             // Задаётся стоимость в жизнях.
             m_LivesCost = characteristics.LivesCost;
-
             // Установка анимации бега в аниматор.
             m_SpriteAnimator.SetNewAnimationFrames(characteristics.WalkAnimations);
-
             // Задаётся скейлинг спрайта.
             m_Sprite.size = characteristics.SpriteScale;
-
             // Установка нового размера коллайдера.
             m_BoxCollider.size = characteristics.ColliderSize;
 

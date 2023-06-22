@@ -25,10 +25,7 @@ namespace TowerDefense
         /// <summary>
         /// Вызов события от дочерних элементов.
         /// </summary>
-        protected void InvokeEvent()
-        {
-            OnClicked?.Invoke();
-        }
+        protected void InvokeEvent() => OnClicked?.Invoke();
 
         #endregion
 
