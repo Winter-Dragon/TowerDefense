@@ -3,17 +3,6 @@ using UnityEngine;
 namespace TowerDefense
 {
     /// <summary>
-    /// Инициализация видов башни: лучники, маги, пехота и артиллерия.
-    /// </summary>
-    public enum TowerType
-    {
-        Archer,
-        Mage,
-        Infantry,
-        Artillery
-    }
-
-    /// <summary>
     /// Класс, задающий характеристики башням. Работает из редактора, нельзя поставить на сцену.
     /// </summary>
     [CreateAssetMenu(fileName = "TowerProperties", menuName = "ScriptableObjects/CreateNewTowerProperties")]
@@ -28,26 +17,38 @@ namespace TowerDefense
         [SerializeField] private TowerType m_Type;
 
         /// <summary>
-        /// Туррели данного вида башни.
+        /// Уровень башни.
         /// </summary>
-        [SerializeField] private SO_TurretProperties[] m_Turrets;
+        [Range(1, 5)]
+        [SerializeField] private int m_Tier;
 
         /// <summary>
         /// Префаб башни.
         /// </summary>
         [SerializeField] private GameObject m_TurretPrefab;
 
+        /// <summary>
+        /// Стоимость башни в золоте.
+        /// </summary>
+        [Min(0)]
+        [SerializeField] private int m_GoldCost;
+
         #region Links
 
         /// <summary>
-        /// Туррели данного вида башни.
+        /// Уровень башни.
         /// </summary>
-        public SO_TurretProperties[] Turrets => m_Turrets;
+        public int Tier => m_Tier;
 
         /// <summary>
         /// Префаб башни.
         /// </summary>
         public GameObject TurretPrefab => m_TurretPrefab;
+
+        /// <summary>
+        /// Стоимость башни в золоте.
+        /// </summary>
+        public int GoldCost => m_GoldCost;
 
         #endregion
 

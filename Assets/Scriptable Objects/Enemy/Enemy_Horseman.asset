@@ -22,8 +22,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 38ef4ba2a8ebb684c9b92868b16fff35, type: 3}
   - {fileID: 21300000, guid: b7dc9f7cbb3d6044e8d918b2eda00abc, type: 3}
   - {fileID: 21300000, guid: e17efe936d596534090edb037374a180, type: 3}
-  m_HitPoints: 35
-  m_Armor: 0
+  m_HitPoints: 20
+  m_Armor: 5
+  m_TypeArmor: 2
   m_MoveSpeed: 1.5
   m_LivesCost: 1
   m_GoldCost: 10

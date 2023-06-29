@@ -17,7 +17,7 @@ MonoBehaviour:
   m_GoldCost: 70
   m_ProjectilePrefab: {fileID: 3243017834941496065, guid: a54a257053a3d964aaebaa66842ba224, type: 3}
   m_Damage: {x: 4, y: 6}
-  m_RateOfFire: 1
+  m_RateOfFire: 0.8
   m_Radius: 2
   m_Homing: 1
   m_LaunchSFX: {fileID: 0}

@@ -93,6 +93,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 830136080288036939}
+  - component: {fileID: -3016082010066891163}
+  - component: {fileID: -6420924611702075856}
   m_Layer: 0
   m_Name: Tower_Mages
   m_TagString: Untagged
@@ -117,6 +119,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3016082010066891163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830136080288036938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e759f164f215e6498e47e9406aa3947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CurrentTowerProperties: {fileID: 11400000, guid: fb78c4ace37b8b34793f1fddf7e6dd1b, type: 2}
+  m_Turrets:
+  - {fileID: 830136080369883622}
+  m_StartRadius: 2.3
+--- !u!58 &-6420924611702075856
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830136080288036938}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.3
 --- !u!1 &830136080369883642
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +162,6 @@ GameObject:
   - component: {fileID: 830136080369883643}
   - component: {fileID: 830136080369883622}
   - component: {fileID: 830136080369883641}
-  - component: {fileID: 830136080369883640}
   m_Layer: 0
   m_Name: Turret_Base
   m_TagString: Untagged
@@ -163,7 +196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abffe7a5ebd8e104c80c7882c044e529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mode: 0
   m_TurretProperties: {fileID: 11400000, guid: a58389860335f324da694f08c6acf07b, type: 2}
 --- !u!82 &830136080369883641
 AudioSource:
@@ -261,19 +293,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!58 &830136080369883640
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 830136080369883642}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 2.9

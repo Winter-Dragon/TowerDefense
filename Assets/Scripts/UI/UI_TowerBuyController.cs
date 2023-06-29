@@ -43,11 +43,6 @@ namespace TowerDefense
         private bool m_IsActive;
 
         /// <summary>
-        /// Текущие характеристики башни для постройки.
-        /// </summary>
-        private SO_TurretProperties m_CurrentTurret;
-
-        /// <summary>
         /// Точка для постройки башни.
         /// </summary>
         private ConstructionSite m_ConstructionSite;
@@ -59,36 +54,18 @@ namespace TowerDefense
 
         private void Awake()
         {
-            // Проверка на наличие характеристик туррели.
-            if (m_TowerProperties == null) Debug.Log("Tower Properties is null!");
-            else
+            if (!m_TowerProperties) Debug.Log("Tower Properties is null!");
+            // Если есть характеристики башни.
+            else 
             {
-                // Проверка на наличие массива с видами башен.
-                if (m_TowerProperties.Turrets == null || m_TowerProperties.Turrets.Length == 0) Debug.Log("Turret Properties in TowerProps is null!");
-                else
+                
+                // Если уровень башни = 1, устанавливает значение золота в текстовое поле.
+                if (m_TowerProperties.Tier == 1)
                 {
-                    // Переменная, отображающая количество башен в массиве с тем же уровнем.
-                    int count = 0;
-
-                    // Цикл по всем туррелям в башне.
-                    for (int i = 0; i < m_TowerProperties.Turrets.Length; i++)
-                    {
-                        // Если уровень башни = 1, назначает её основной для постройки.
-                        if (m_TowerProperties.Turrets[i].Tier == 1)
-                        {
-                            m_CurrentTurret = m_TowerProperties.Turrets[i];
-                            count++;
-                        }
-                    }
-
-                    // Если кол-во башен с Tier 1: 0 либо больше одной - сообщение об ошибке.
-                    if (count == 0 || count < 1) { Debug.Log("Turrets in Tier 1 < 1 or 0!"); m_CurrentTurret = null; }
-                    // Если всё ок - установить начальное значение золота.
-                    else
-                    {
-                        m_GoldText.text = m_CurrentTurret.GoldCost.ToString();
-                    }
+                    m_GoldText.text = m_TowerProperties.GoldCost.ToString();
                 }
+                else { Debug.Log("Tower level > 1! The gold value is not assigned."); }
+                
             }
         }
 
@@ -177,7 +154,7 @@ namespace TowerDefense
         {
             if (TowerBuyController.Instance == null) { Debug.Log("TowerBuyController.Instance == null!"); return; }
 
-            TowerBuyController.Instance.TryBuildTower(m_ConstructionSite, m_TowerProperties, m_CurrentTurret.GoldCost);
+            TowerBuyController.Instance.TryBuildTower(m_ConstructionSite, m_TowerProperties, m_TowerProperties.GoldCost);
         }
 
         #endregion
@@ -191,14 +168,13 @@ namespace TowerDefense
         /// <param name="gold">Текущее кол-во золота игрока.</param>
         public void UpdateState(int gold)
         {
-            // Если активной туррели нет - выйти из метода.
-            if (m_CurrentTurret == null) return;
+            if (!m_TowerProperties) return;
 
             // Проверка, хватает ли игроку золота. Если метод вызывается повторно - выйти (чтобы лишний раз не обновлять интерфейс).
             switch (m_IsActive)
             {
                 case false:
-                    if (gold >= m_CurrentTurret.GoldCost)
+                    if (gold >= m_TowerProperties.GoldCost)
                     {
                         m_IsActive = true;
                     }
@@ -206,7 +182,7 @@ namespace TowerDefense
                     break;
 
                 case true:
-                    if (gold < m_CurrentTurret.GoldCost)
+                    if (gold < m_TowerProperties.GoldCost)
                     {
                         m_IsActive = false;
                     }

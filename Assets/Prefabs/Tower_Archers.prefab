@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3112833670306555044}
+  - component: {fileID: 1019756366206964646}
+  - component: {fileID: 4508993130827794018}
   m_Layer: 0
   m_Name: Tower_Archers
   m_TagString: Untagged
@@ -33,6 +35,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1019756366206964646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3112833670306555042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e759f164f215e6498e47e9406aa3947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CurrentTowerProperties: {fileID: 11400000, guid: fd3cc60f0cc93b44e859acea27cb3dac, type: 2}
+  m_Turrets:
+  - {fileID: 3112833671558019578}
+  m_StartRadius: 2.5
+--- !u!58 &4508993130827794018
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3112833670306555042}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.5
 --- !u!1 &3112833671398749415
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +162,6 @@ GameObject:
   - component: {fileID: 3112833671558019576}
   - component: {fileID: 3112833671558019578}
   - component: {fileID: 3112833671558019579}
-  - component: {fileID: 3112833671558019581}
   m_Layer: 0
   m_Name: Turret_Base
   m_TagString: Untagged
@@ -163,7 +196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abffe7a5ebd8e104c80c7882c044e529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mode: 0
   m_TurretProperties: {fileID: 11400000, guid: d8163f230d207ad428da5f83d5bd53bd, type: 2}
 --- !u!82 &3112833671558019579
 AudioSource:
@@ -261,19 +293,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!58 &3112833671558019581
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3112833671558019577}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 3

@@ -6,7 +6,7 @@ namespace TowerDefense
     /// <summary>
     /// Основной класс туррели, позволяющий ей стрелять.
     /// </summary>
-    [RequireComponent(typeof(AudioSource), typeof(CircleCollider2D))]
+    [RequireComponent(typeof(AudioSource))]
     public class Turret : MonoBehaviour
     {
 
@@ -18,19 +18,14 @@ namespace TowerDefense
         [SerializeField] private SO_TurretProperties m_TurretProperties;
 
         /// <summary>
+        /// Ссылка на текущую башню.
+        /// </summary>
+        private Tower m_CurrentTower;
+
+        /// <summary>
         /// Ссылка на Audio Source у туррели.
         /// </summary>
         private AudioSource m_AudioSource;
-
-        /// <summary>
-        /// Список врагов, вошедших в радиус башни.
-        /// </summary>
-        private readonly List<Enemy> m_Enemy = new();
-
-        /// <summary>
-        /// Коллайдер башни.
-        /// </summary>
-        private CircleCollider2D m_Collider;
 
         #region Timers
 
@@ -62,15 +57,14 @@ namespace TowerDefense
 
         private void Start()
         {
-            // Назначить коллайдер текущего объекта.
-            m_Collider = GetComponent<CircleCollider2D>();
-            m_Collider.radius = m_TurretProperties.Radius;
+            // Если у рут объекта есть скрипт башни - назначается башня.
+            if (gameObject.transform.root.TryGetComponent<Tower>(out Tower tower)) m_CurrentTower = tower;
+            else { Debug.Log("Script \"Tower\" absent! Turret disabled."); enabled = false; }
 
-            /*
+            
             // Задать переменную аудиосурса и записать нужный клип из Turret Properties.
             m_AudioSource = GetComponent<AudioSource>();
-            m_AudioSource.clip = m_TurretProperties.LaunchSFX;
-            */
+            if (m_AudioSource && m_TurretProperties.LaunchSFX) m_AudioSource.clip = m_TurretProperties.LaunchSFX;
 
             // Инициализация таймеров.
             InitTimers();
@@ -91,27 +85,7 @@ namespace TowerDefense
             UpdateTimers();
 
             // Если массив с врагами > 0 - стрелять.
-            if (m_Enemy.Count > 0) Fire();
-        }
-
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            // Если враг вошёл в коллайдер.
-            if (collision.transform.root.TryGetComponent<Enemy>(out Enemy enemy))
-            {
-                // Добавить в список атаки.
-                m_Enemy.Add(enemy);
-            }
-        }
-
-        private void OnTriggerExit2D(Collider2D collision)
-        {
-            // Если враг вышел из коллайдера.
-            if (collision.transform.root.TryGetComponent<Enemy>(out Enemy enemy))
-            {
-                // Удалить из списка атаки.
-                m_Enemy.Remove(enemy);
-            }
+            if (m_CurrentTower.EnemyList.Count > 0) Fire();
         }
 
         #endregion
@@ -141,7 +115,8 @@ namespace TowerDefense
                     m_RefiteTimer = new Timer(m_TurretProperties.RateOfFire, false);
                 }
             }
-            if (m_AudioSource != null) m_AudioTimer = new Timer(m_AudioSource.clip.length, false);
+            // Если источник звука есть - создаётся таймер.
+            if (m_AudioSource) m_AudioTimer = new Timer(m_AudioSource.clip.length, false);
         }
 
         /// <summary>
@@ -169,14 +144,14 @@ namespace TowerDefense
             projectile.transform.up = transform.up;
 
             // Передать снаряду текущие характеристики туррели и цель для атаки.
-            projectile.TuneProjectile(m_Enemy[0], GetComponent<Turret>());
+            projectile.TuneProjectile(m_CurrentTower.EnemyList[0], GetComponent<Turret>());
 
             // Проиграть звук выстрела.
-            //if (m_AudioTimer != null || !m_AudioTimer.IsFinished)
-            //{
-            //  m_AudioSource.Play();
-            //m_AudioTimer.RestartTimer();
-            //}
+            if (m_AudioTimer != null && !m_AudioTimer.IsFinished)
+            {
+                m_AudioSource.Play();
+                m_AudioTimer.RestartTimer();
+            }
 
             // Повторный запуск таймера.
             m_RefiteTimer.RestartTimer();

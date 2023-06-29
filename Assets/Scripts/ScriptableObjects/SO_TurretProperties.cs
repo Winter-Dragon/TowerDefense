@@ -17,18 +17,6 @@ namespace TowerDefense
         [SerializeField] private TowerType m_Type;
 
         /// <summary>
-        /// Уровень башни.
-        /// </summary>
-        [Range(1, 5)]
-        [SerializeField] private int m_Tier;
-
-        /// <summary>
-        /// Стоимость башни в золоте.
-        /// </summary>
-        [Min(0)]
-        [SerializeField] private int m_GoldCost;
-
-        /// <summary>
         /// Ссылка на префаб Projectile.
         /// </summary>
         [SerializeField] private Projectile m_ProjectilePrefab;
@@ -42,11 +30,6 @@ namespace TowerDefense
         /// Скорострельность туррели.
         /// </summary>
         [SerializeField] private float m_RateOfFire;
-
-        /// <summary>
-        /// Радиус атаки башни.
-        /// </summary>
-        [SerializeField] private float m_Radius;
 
         /// <summary>
         /// Самонаведение.
@@ -66,16 +49,6 @@ namespace TowerDefense
         public TowerType Type => m_Type;
 
         /// <summary>
-        /// Уровень башни.
-        /// </summary>
-        public int Tier => m_Tier;
-
-        /// <summary>
-        /// Стоимость башни в золоте.
-        /// </summary>
-        public int GoldCost => m_GoldCost;
-
-        /// <summary>
         /// Ссылка на текущий Projectile.
         /// </summary>
         public Projectile ProjectilePrefab => m_ProjectilePrefab;
@@ -89,11 +62,6 @@ namespace TowerDefense
         /// Ссылка на текущую скорострельность туррели.
         /// </summary>
         public float RateOfFire => m_RateOfFire;
-
-        /// <summary>
-        /// Радиус атаки башни.
-        /// </summary>
-        public float Radius => m_Radius;
 
         /// <summary>
         /// Ссылка, показывающая, самонаводящееся ли оружие.

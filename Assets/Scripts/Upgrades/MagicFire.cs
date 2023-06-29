@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace TowerDefense
@@ -30,6 +28,10 @@ namespace TowerDefense
         {
             // Назначается цель.
             m_CurrentEnemy = transform.root.GetComponent<Enemy>();
+
+            // Если врага нет - уничтожиться.
+            if (!m_CurrentEnemy) Destroy(gameObject);
+
             // Создаётся таймер.
             m_Timer = new Timer(0.5f, true);
         }

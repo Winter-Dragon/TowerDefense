@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6280093950274739621}
   - component: {fileID: 6280093950274739608}
   - component: {fileID: 6280093950274739611}
-  - component: {fileID: 6280093950274739610}
   m_Layer: 0
   m_Name: Turret_Base
   m_TagString: Untagged
@@ -46,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abffe7a5ebd8e104c80c7882c044e529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mode: 0
   m_TurretProperties: {fileID: 11400000, guid: 2d0f3c6b1c818064a8a6d743071c42fd, type: 2}
 --- !u!82 &6280093950274739611
 AudioSource:
@@ -144,22 +142,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!58 &6280093950274739610
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6280093950274739620}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 2.9
 --- !u!1 &6280093950510781664
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,6 +235,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6280093950824529605}
+  - component: {fileID: 1168028684158124633}
+  - component: {fileID: 7604857196730503299}
   m_Layer: 0
   m_Name: Tower_Artillery
   m_TagString: Untagged
@@ -277,3 +261,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1168028684158124633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6280093950824529604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e759f164f215e6498e47e9406aa3947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CurrentTowerProperties: {fileID: 11400000, guid: 328f007517b5a614d959904f7ddbed7c, type: 2}
+  m_Turrets:
+  - {fileID: 6280093950274739608}
+  m_StartRadius: 2.3
+--- !u!58 &7604857196730503299
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6280093950824529604}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.3
