@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TP_Mages_01
   m_EditorClassIdentifier: 
   m_Type: 1
-  m_Turrets:
-  - {fileID: 11400000, guid: a58389860335f324da694f08c6acf07b, type: 2}
+  m_Tier: 1
   m_TurretPrefab: {fileID: 830136080288036938, guid: df382c9a02185f04a9f4eb400919c8b8, type: 3}
+  m_GoldCost: 100

@@ -116,7 +116,7 @@ namespace TowerDefense
                 }
             }
             // Если источник звука есть - создаётся таймер.
-            if (m_AudioSource) m_AudioTimer = new Timer(m_AudioSource.clip.length, false);
+            if (m_AudioSource && m_AudioSource.clip) m_AudioTimer = new Timer(m_AudioSource.clip.length, false);
         }
 
         /// <summary>

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TP_Artillery_01
   m_EditorClassIdentifier: 
   m_Type: 3
-  m_Turrets:
-  - {fileID: 11400000, guid: 2d0f3c6b1c818064a8a6d743071c42fd, type: 2}
+  m_Tier: 1
   m_TurretPrefab: {fileID: 6280093950824529604, guid: 6afb8b7b05c8d39418cd5dbbddc2dba1, type: 3}
+  m_GoldCost: 120

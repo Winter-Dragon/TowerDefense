@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TP_Archers_01
   m_EditorClassIdentifier: 
   m_Type: 0
-  m_Turrets:
-  - {fileID: 11400000, guid: d8163f230d207ad428da5f83d5bd53bd, type: 2}
+  m_Tier: 1
   m_TurretPrefab: {fileID: 3112833670306555042, guid: e53b508827e6f8e40a8943c502e7e3f1, type: 3}
+  m_GoldCost: 70

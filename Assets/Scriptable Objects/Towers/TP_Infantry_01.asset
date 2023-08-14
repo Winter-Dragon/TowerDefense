@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TP_Infantry_01
   m_EditorClassIdentifier: 
   m_Type: 2
-  m_Turrets:
-  - {fileID: 11400000, guid: 25e3afd6844bc1345bbc7440a8ca5513, type: 2}
+  m_Tier: 1
   m_TurretPrefab: {fileID: 5596871808391429737, guid: 6e8e38942d1be644ab67de80afb6541e, type: 3}
+  m_GoldCost: 90
